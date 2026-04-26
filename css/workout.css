@@ -1,0 +1,1081 @@
+/* =============================================================
+   MACROBASE -- workout.css
+   Workout Logger Module (Module 02)
+   Inherits all CSS custom properties from styles.css
+============================================================= */
+
+/* --- MODULE HEADER ----------------------------------------- */
+.wl-module-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.wl-module-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wl-eyebrow {
+  font-family: var(--font-data);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--fats); /* teal -- physical activity */
+}
+
+.wl-title {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.wl-header-stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.wl-hstat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+}
+
+.wl-hstat-value {
+  font-family: var(--font-data);
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  transition: color var(--dur-med);
+}
+
+.wl-hstat-label {
+  font-family: var(--font-display);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+.wl-hstat-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border-mid);
+}
+
+/* --- FORM CARD --------------------------------------------- */
+.wl-form-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-2);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Top accent stripe -- vibrant teal for physical activity */
+.wl-form-card::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, #009688 0%, #FF5722 60%, transparent 100%);
+}
+
+.wl-form-card-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-dim);
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+}
+
+.wl-form-card-label svg {
+  width: 12px;
+  height: 12px;
+  color: var(--fats);
+}
+
+#workoutEntryForm {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* --- FORM FIELDS ------------------------------------------- */
+.wl-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.wl-label {
+  font-family: var(--font-display);
+  font-size: 0.5875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  user-select: none;
+}
+
+.wl-label-optional {
+  font-family: var(--font-data);
+  font-size: 0.5rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  opacity: 0.6;
+  font-style: italic;
+  text-transform: lowercase;
+}
+
+/* --- ACTIVITY SELECT --------------------------------------- */
+.wl-select-wrap {
+  position: relative;
+}
+
+.wl-select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: var(--bg-base);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-md);
+  padding: 0.75rem var(--space-lg) 0.75rem var(--space-md);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast), background var(--dur-fast);
+  /* Large touch target for gym use */
+  min-height: 52px;
+  border-left: 3px solid var(--fats);
+}
+
+.wl-select:focus {
+  outline: none;
+  border-color: var(--fats);
+  background: var(--bg-elevated);
+  box-shadow: 0 0 0 3px rgba(0,201,177,0.15);
+}
+
+/* Fix Firefox option background */
+.wl-select option {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  padding: var(--space-sm);
+}
+
+.wl-select-chevron {
+  position: absolute;
+  right: var(--space-md);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  color: var(--text-muted);
+  pointer-events: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* --- CUSTOM NAME FIELD (hidden by default) ----------------- */
+.wl-custom-name-field {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition:
+    max-height 0.35s var(--ease-out),
+    opacity    0.25s var(--ease-out),
+    margin     0.35s var(--ease-out);
+  margin-bottom: 0;
+  pointer-events: none;
+}
+
+.wl-custom-name-field.wl-visible {
+  max-height: 80px;
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* --- TEXT / NUMBER INPUTS ---------------------------------- */
+.wl-input {
+  width: 100%;
+  background: var(--bg-base);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-md);
+  padding: 0.6875rem var(--space-md);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast), background var(--dur-fast);
+  -moz-appearance: textfield;
+  appearance: textfield;
+  /* Tall touch target */
+  min-height: 48px;
+}
+
+.wl-input::-webkit-inner-spin-button,
+.wl-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+.wl-input::placeholder { color: var(--text-muted); font-size: 0.875rem; }
+
+.wl-input:focus {
+  outline: none;
+  border-color: var(--fats);
+  background: var(--bg-elevated);
+  box-shadow: 0 0 0 3px rgba(0,201,177,0.15);
+}
+
+/* Input with unit suffix */
+.wl-input-wrap {
+  position: relative;
+}
+
+.wl-input-wrap .wl-input {
+  padding-right: 3rem;
+  border-left: 3px solid var(--fats);
+}
+
+.wl-input-unit {
+  position: absolute;
+  right: var(--space-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-data);
+  font-size: 0.625rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  letter-spacing: 0.05em;
+}
+
+/* Calorie estimate hint */
+.wl-calest-hint {
+  font-family: var(--font-data);
+  font-size: 0.5625rem;
+  color: var(--fats);
+  letter-spacing: 0.08em;
+  min-height: 14px;
+  transition: opacity var(--dur-fast);
+  padding-left: 3px;
+}
+
+/* --- METRICS ROW ------------------------------------------- */
+.wl-metrics-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+/* --- FORM ACTIONS ------------------------------------------ */
+.wl-form-actions {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+  padding-top: var(--space-xs);
+}
+
+.wl-btn-clear {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--space-sm) var(--space-md);
+  background: transparent;
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  min-height: 44px;
+  transition: color var(--dur-fast), border-color var(--dur-fast), background var(--dur-fast);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.wl-btn-clear svg { width: 12px; height: 12px; }
+
+.wl-btn-clear:hover {
+  color: var(--danger);
+  border-color: rgba(239,68,68,0.3);
+  background: rgba(239,68,68,0.05);
+}
+
+.wl-btn-submit {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--fats);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  min-height: 48px;
+  cursor: pointer;
+  transition: background var(--dur-fast), transform var(--dur-fast), box-shadow var(--dur-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.wl-btn-submit svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+.wl-btn-submit::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.wl-btn-submit:hover {
+  background: #0d6b63;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(15,118,110,0.25);
+}
+
+.wl-btn-submit:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.wl-btn-submit.wl-submit--success {
+  background: var(--success);
+  color: #fff;
+}
+
+/* Validation error shake */
+@keyframes wl-shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+.wl-input--error,
+.wl-select--error {
+  border-color: var(--danger) !important;
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.15) !important;
+  animation: wl-shake 0.35s var(--ease-out);
+}
+
+/* --- WORKOUT HISTORY --------------------------------------- */
+.wl-history {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+}
+
+.wl-history-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.wl-history-empty svg {
+  width: 48px;
+  height: 48px;
+  opacity: 0.2;
+}
+
+.wl-history-empty p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* History entry row */
+.wl-entry {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border-dim);
+  transition: background var(--dur-fast);
+  animation: wl-entryIn var(--dur-med) var(--ease-out) both;
+}
+
+.wl-entry:last-child { border-bottom: none; }
+
+.wl-entry:hover { background: var(--bg-elevated); }
+
+@keyframes wl-entryIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Activity type icon badge */
+.wl-entry-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wl-entry-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.wl-entry-icon--strength {
+  background: rgba(194,71,10,0.08);
+  color: var(--protein);
+  border: 1px solid rgba(194,71,10,0.18);
+}
+
+.wl-entry-icon--bouldering {
+  background: rgba(15,118,110,0.08);
+  color: var(--fats);
+  border: 1px solid rgba(15,118,110,0.18);
+}
+
+.wl-entry-icon--skateboarding {
+  background: rgba(180,83,9,0.08);
+  color: var(--carbs);
+  border: 1px solid rgba(180,83,9,0.18);
+}
+
+.wl-entry-icon--other {
+  background: rgba(29,78,216,0.08);
+  color: var(--info);
+  border: 1px solid rgba(29,78,216,0.18);
+}
+
+/* Entry info column */
+.wl-entry-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.wl-entry-name {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wl-entry-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.wl-entry-duration-badge {
+  font-family: var(--font-data);
+  font-size: 0.5625rem;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-dim);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.05em;
+}
+
+.wl-entry-time {
+  font-family: var(--font-data);
+  font-size: 0.5375rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.wl-entry-notes {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
+}
+
+/* Right column: calories + delete */
+.wl-entry-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.wl-entry-cal-value {
+  font-family: var(--font-data);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--fats);
+  line-height: 1;
+}
+
+.wl-entry-cal-unit {
+  font-family: var(--font-display);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.wl-entry-delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color var(--dur-fast), background var(--dur-fast);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.wl-entry-delete svg { width: 11px; height: 11px; }
+
+.wl-entry-delete:hover {
+  color: var(--danger);
+  background: rgba(239,68,68,0.1);
+}
+
+/* Fade-out animation on delete */
+@keyframes wl-entryOut {
+  from { opacity: 1; transform: translateX(0);    max-height: 90px; padding-top: var(--space-md); padding-bottom: var(--space-md); }
+  to   { opacity: 0; transform: translateX(24px); max-height: 0;    padding-top: 0;              padding-bottom: 0; }
+}
+
+.wl-entry--removing {
+  animation: wl-entryOut 0.3s var(--ease-out) forwards;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* History totals footer */
+.wl-history-totals {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border-mid);
+}
+
+.wl-totals-label {
+  font-family: var(--font-display);
+  font-size: 0.5875rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+.wl-totals-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.wl-totals-val {
+  font-family: var(--font-data);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--fats);
+  line-height: 1;
+}
+
+.wl-totals-lbl {
+  font-family: var(--font-display);
+  font-size: 0.4375rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.wl-totals-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--border-dim);
+}
+
+/* --- RESPONSIVE -------------------------------------------- */
+@media (max-width: 768px) {
+  .wl-module-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding-bottom: var(--space-sm);
+  }
+
+  .wl-header-stats {
+    align-self: stretch;
+    justify-content: flex-start;
+  }
+
+  .wl-hstat { align-items: flex-start; }
+
+  .wl-metrics-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .wl-title { font-size: 1.75rem; }
+
+  .wl-metrics-row {
+    grid-template-columns: 1fr;
+  }
+
+  .wl-entry {
+    grid-template-columns: auto 1fr auto;
+    gap: var(--space-sm);
+  }
+
+  .wl-entry-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .wl-entry-icon svg { width: 16px; height: 16px; }
+
+  .wl-entry-notes { display: none; }
+}
+
+/* =============================================================
+   ACTIVITY PICKER -- search-first exercise selector
+============================================================= */
+
+/* Selected activity display */
+.wl-activity-selected {
+  display: none;  /* shown by JS when an activity is selected */
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--fats);
+  border-left: 3px solid var(--fats);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-1);
+}
+
+.wl-activity-selected.visible { display: flex; }
+
+.wl-sel-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(15,118,110,0.1);
+  color: var(--fats);
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.wl-sel-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wl-sel-name {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wl-sel-meta {
+  font-family: var(--font-data);
+  font-size: 0.5625rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.wl-sel-change {
+  flex-shrink: 0;
+  padding: 4px 10px;
+  background: none;
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 0.5875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color var(--dur-fast), border-color var(--dur-fast);
+}
+
+.wl-sel-change:hover { color: var(--accent); border-color: var(--accent-glow); }
+
+/* Picker container */
+.wl-activity-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-1);
+}
+
+/* Search input row */
+.wl-picker-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.wl-picker-search-icon {
+  position: absolute;
+  left: var(--space-md);
+  width: 14px;
+  height: 14px;
+  color: var(--text-muted);
+  pointer-events: none;
+  flex-shrink: 0;
+  transition: color var(--dur-fast);
+}
+
+.wl-picker-search {
+  width: 100%;
+  background: var(--bg-surface);
+  border: none;
+  padding: 0.75rem var(--space-xl) 0.75rem 2.75rem;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.wl-picker-search::-webkit-search-cancel-button { -webkit-appearance: none; }
+.wl-picker-search::placeholder { color: var(--text-muted); font-size: 0.875rem; }
+
+.wl-picker-search-wrap:focus-within .wl-picker-search-icon { color: var(--fats); }
+
+.wl-picker-search-clear {
+  position: absolute;
+  right: var(--space-sm);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-fast), color var(--dur-fast), background var(--dur-fast);
+}
+
+.wl-picker-search-clear svg { width: 10px; height: 10px; }
+.wl-picker-search-clear:hover { color: var(--danger); background: rgba(198,40,40,0.08); }
+.wl-picker-search-wrap.has-query .wl-picker-search-clear { opacity: 1; pointer-events: all; }
+
+/* Category chips */
+.wl-category-chips {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-dim);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.wl-category-chips::-webkit-scrollbar { display: none; }
+
+.wl-cat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 0.5875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-dim);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color var(--dur-fast), background var(--dur-fast), border-color var(--dur-fast);
+}
+
+.wl-cat-chip:hover { color: var(--text-primary); border-color: var(--border-hi); }
+
+.wl-cat-chip[data-cat="all"].active       { color: var(--accent);   background: var(--accent-dim);            border-color: var(--accent-glow); }
+.wl-cat-chip[data-cat="strength"].active  { color: #D84315;         background: rgba(216,67,21,0.08);          border-color: rgba(216,67,21,0.2); }
+.wl-cat-chip[data-cat="cardio"].active    { color: #C62828;         background: rgba(198,40,40,0.08);          border-color: rgba(198,40,40,0.2); }
+.wl-cat-chip[data-cat="sports"].active    { color: var(--info);     background: rgba(21,101,192,0.08);         border-color: rgba(21,101,192,0.2); }
+.wl-cat-chip[data-cat="outdoor"].active   { color: var(--success);  background: rgba(46,125,50,0.08);          border-color: rgba(46,125,50,0.2); }
+.wl-cat-chip[data-cat="flexibility"].active { color: #6A1B9A;       background: rgba(106,27,154,0.08);         border-color: rgba(106,27,154,0.2); }
+
+/* Results list */
+.wl-activity-results {
+  max-height: 280px;
+  overflow-y: auto;
+  background: var(--bg-surface);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-mid) transparent;
+}
+
+.wl-activity-results::-webkit-scrollbar { width: 4px; }
+.wl-activity-results::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 2px; }
+
+/* Individual result row */
+.wl-result-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border-dim);
+  cursor: pointer;
+  transition: background var(--dur-fast);
+  animation: wl-resultIn var(--dur-fast) var(--ease-out) both;
+}
+
+.wl-result-item:last-child { border-bottom: none; }
+.wl-result-item:hover      { background: var(--bg-elevated); }
+.wl-result-item:active     { background: var(--border-dim); }
+
+@keyframes wl-resultIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.wl-result-emoji {
+  font-size: 1.25rem;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+}
+
+.wl-result-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wl-result-name {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wl-result-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.wl-result-cat {
+  font-family: var(--font-display);
+  font-size: 0.4375rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 1px 5px;
+  border-radius: 2px;
+}
+
+/* Category color variants for result badges */
+.wl-cat--strength  { background: rgba(216,67,21,0.1);  color: #D84315; }
+.wl-cat--cardio    { background: rgba(198,40,40,0.1);  color: #C62828; }
+.wl-cat--sports    { background: rgba(21,101,192,0.1); color: var(--info); }
+.wl-cat--outdoor   { background: rgba(46,125,50,0.1);  color: var(--success); }
+.wl-cat--flexibility { background: rgba(106,27,154,0.1); color: #6A1B9A; }
+.wl-cat--api       { background: var(--accent-dim);     color: var(--accent); }
+
+.wl-result-intensity {
+  font-family: var(--font-data);
+  font-size: 0.4375rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.wl-result-source {
+  font-family: var(--font-data);
+  font-size: 0.4375rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  padding: 1px 4px;
+  border: 1px solid var(--accent-glow);
+  border-radius: 2px;
+}
+
+.wl-result-select {
+  flex-shrink: 0;
+  padding: 4px 10px;
+  background: var(--fats);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background var(--dur-fast), transform var(--dur-fast);
+  pointer-events: none; /* parent div handles click */
+}
+
+.wl-result-item:hover .wl-result-select {
+  background: #0d6b63;
+}
+
+/* Loading, empty, error states */
+.wl-results-loading,
+.wl-results-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+}
+
+.wl-results-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-mid);
+  border-top-color: var(--fats);
+  border-radius: 50%;
+  animation: wl-spin 0.7s linear infinite;
+}
+
+@keyframes wl-spin { to { transform: rotate(360deg); } }
+
+.wl-results-loading-text,
+.wl-results-empty-text {
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+/* API attribution note */
+.wl-api-note {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--space-xs) var(--space-md);
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border-dim);
+  font-family: var(--font-data);
+  font-size: 0.5rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.wl-api-badge {
+  display: inline-block;
+  padding: 0 4px;
+  background: rgba(46,125,50,0.12);
+  color: var(--success);
+  border: 1px solid rgba(46,125,50,0.25);
+  border-radius: 2px;
+  font-size: 0.375rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.wl-api-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-mid);
+  transition: color var(--dur-fast);
+}
+.wl-api-link:hover { color: var(--accent); }
+
+/* Results section labels (LOCAL / WGER RESULTS) */
+.wl-results-section-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-md);
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border-dim);
+  font-family: var(--font-display);
+  font-size: 0.5375rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+.wl-results-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-dim);
+}
+
+@media (max-width: 480px) {
+  .wl-activity-results { max-height: 220px; }
+}
