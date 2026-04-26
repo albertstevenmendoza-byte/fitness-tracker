@@ -3,7 +3,7 @@
  * IRONMACRO — food.js  (Module 03)
  * Food Logger: form handling, quick-add, history rendering.
  *
- * Depends on:  IronMacro (app.js) — must load after app.js
+ * Depends on:  MacroBase (app.js) — must load after app.js
  * Public API:  FoodLogger.refresh()  — re-render history
  *              FoodLogger.addQuickItem(item) — add custom quick-add
  * ═══════════════════════════════════════════════════════════
@@ -15,11 +15,11 @@ const FoodLogger = (() => {
   /* ─── WAIT FOR IRONMACRO CORE ────────────────────────────
      app.js boots on DOMContentLoaded. food.js hooks in
      immediately after via its own DOMContentLoaded listener
-     (scripts load in order, so IronMacro is defined by now).
+     (scripts load in order, so MacroBase is defined by now).
   ─────────────────────────────────────────────────────────── */
 
   /* ─── QUICK-ADD ITEM DATABASE ────────────────────────────
-     Each item maps directly to the IronMacro.addFoodEntry()
+     Each item maps directly to the MacroBase.addFoodEntry()
      payload shape. Add more items to pre-populate the panel.
   ─────────────────────────────────────────────────────────── */
   const QUICK_ITEMS = [
@@ -65,7 +65,7 @@ const FoodLogger = (() => {
 
   /* ─── STATE ──────────────────────────────────────────────
      food.js only manages its own UI state; the source of
-     truth for entries lives in IronMacro / localStorage.
+     truth for entries lives in MacroBase / localStorage.
   ─────────────────────────────────────────────────────────── */
   let selectedMeal = 'breakfast';
 
@@ -99,13 +99,21 @@ const FoodLogger = (() => {
     el.prevBarP    = document.getElementById('prev-bar-protein');
     el.prevBarC    = document.getElementById('prev-bar-carbs');
     el.prevBarF    = document.getElementById('prev-bar-fats');
+    // Food database search
+    el.dbSearch      = document.getElementById('fl-dbSearch');
+    el.dbInput       = document.getElementById('fl-foodSearch');
+    el.dbClear       = document.getElementById('fl-dbSearchClear');
+    el.dbResults     = document.getElementById('fl-dbResults');
+    el.dbSourceRow   = document.getElementById('fl-dbSourceRow');
+    el.dbSourceText  = document.getElementById('fl-dbSourceText');
+    el.dbSourceReset = document.getElementById('fl-dbSourceReset');
   }
 
   /* ─── HELPERS ────────────────────────────────────────────── */
   const num   = (str) => Math.max(0, parseFloat(str) || 0);
   const round = (n, d = 1) => +n.toFixed(d);
-  const fmt   = (n) => IronMacro.fmt(n);
-  const { KCAL_PER_GRAM } = IronMacro;
+  const fmt   = (n) => MacroBase.fmt(n);
+  const { KCAL_PER_GRAM } = MacroBase;
 
   /**
    * Calculate estimated calories from macros.
@@ -142,6 +150,9 @@ const FoodLogger = (() => {
     if (el.form) el.form.reset();
     updatePreview();
     updateAutocalHint();
+    // Clear any DB source badge
+    el.dbSourceRow?.classList.remove('visible');
+    fsSelectedSource = null;
     if (el.name) el.name.focus();
   }
 
@@ -176,9 +187,9 @@ const FoodLogger = (() => {
       const calC = (v.carbs   * KCAL_PER_GRAM.carbs   / displayCal) * 100;
       const calF = (v.fats    * KCAL_PER_GRAM.fats    / displayCal) * 100;
 
-      if (el.prevBarP) el.prevBarP.style.width = `${IronMacro.clamp(calP, 0, 100)}%`;
-      if (el.prevBarC) el.prevBarC.style.width = `${IronMacro.clamp(calC, 0, 100)}%`;
-      if (el.prevBarF) el.prevBarF.style.width = `${IronMacro.clamp(calF, 0, 100)}%`;
+      if (el.prevBarP) el.prevBarP.style.width = `${MacroBase.clamp(calP, 0, 100)}%`;
+      if (el.prevBarC) el.prevBarC.style.width = `${MacroBase.clamp(calC, 0, 100)}%`;
+      if (el.prevBarF) el.prevBarF.style.width = `${MacroBase.clamp(calF, 0, 100)}%`;
     } else {
       [el.prevBarP, el.prevBarC, el.prevBarF].forEach(b => {
         if (b) b.style.width = '0%';
@@ -214,7 +225,7 @@ const FoodLogger = (() => {
     // Validation — name is the only hard requirement
     if (!v.name) {
       flashError(el.name);
-      IronMacro.showToast('Enter a food name.', 'error');
+      MacroBase.showToast('Enter a food name.', 'error');
       el.name?.focus();
       return;
     }
@@ -222,7 +233,7 @@ const FoodLogger = (() => {
     // At least one numeric value required
     if (v.calories === 0 && v.protein === 0 && v.carbs === 0 && v.fats === 0) {
       flashError(el.calories);
-      IronMacro.showToast('Enter at least calories or macros.', 'error');
+      MacroBase.showToast('Enter at least calories or macros.', 'error');
       el.calories?.focus();
       return;
     }
@@ -233,7 +244,7 @@ const FoodLogger = (() => {
     }
 
     // Commit to state via core API
-    IronMacro.addFoodEntry({
+    MacroBase.addFoodEntry({
       name:     v.name,
       calories: v.calories,
       protein:  v.protein,
@@ -244,7 +255,7 @@ const FoodLogger = (() => {
 
     // Success feedback
     animateSubmitSuccess();
-    IronMacro.showToast(`✓ ${v.name} logged`, 'success');
+    MacroBase.showToast(`✓ ${v.name} logged`, 'success');
 
     // Reset form & refresh
     clearForm();
@@ -336,7 +347,7 @@ const FoodLogger = (() => {
     if (!item) return;
 
     // Log via core API — use item's preferred meal time
-    IronMacro.addFoodEntry({
+    MacroBase.addFoodEntry({
       name:     item.name,
       calories: item.calories,
       protein:  item.protein,
@@ -349,20 +360,20 @@ const FoodLogger = (() => {
     card.classList.add('fl-quick--logged');
     setTimeout(() => card.classList.remove('fl-quick--logged'), 700);
 
-    IronMacro.showToast(`✓ ${item.name} logged`, 'success');
+    MacroBase.showToast(`✓ ${item.name} logged`, 'success');
     refreshHistory();
     refreshHeaderStats();
   }
 
   /* ─── HISTORY RENDERING ──────────────────────────────── */
   /**
-   * Get today's food entries from IronMacro core state,
+   * Get today's food entries from MacroBase core state,
    * grouped by meal time in chronological meal order.
    *
    * @returns {Map<string, Array>}  mealKey → entries[]
    */
   function getFoodEntriesByMeal() {
-    const { log } = IronMacro.getState();
+    const { log } = MacroBase.getState();
     const foodEntries = log.filter(e => e.type === 'food');
 
     // Group by meal
@@ -518,7 +529,7 @@ const FoodLogger = (() => {
    * Refresh the module header stat numbers.
    */
   function refreshHeaderStats() {
-    const { log } = IronMacro.getState();
+    const { log } = MacroBase.getState();
     const foodEntries = log.filter(e => e.type === 'food');
     const totalCal = foodEntries.reduce((s, e) => s + (e.calories || 0), 0);
 
@@ -542,13 +553,13 @@ const FoodLogger = (() => {
       // Animate out, then remove from state
       row.classList.add('fl-entry--removing');
       row.addEventListener('animationend', () => {
-        IronMacro.removeEntry(id);
+        MacroBase.removeEntry(id);
         refreshHistory();
         refreshHeaderStats();
-        IronMacro.showToast('Entry removed.', 'info');
+        MacroBase.showToast('Entry removed.', 'info');
       }, { once: true });
     } else {
-      IronMacro.removeEntry(id);
+      MacroBase.removeEntry(id);
       refreshHistory();
       refreshHeaderStats();
     }
@@ -588,6 +599,200 @@ const FoodLogger = (() => {
       .replace(/"/g, '&quot;');
   }
 
+  /* ─── FOOD DATABASE SEARCH (Open Food Facts) ─────────────── */
+
+  const OFF_URL        = 'https://world.openfoodfacts.org/cgi/search.pl';
+  const FS_DEBOUNCE    = 380;
+  const FS_MIN_LEN     = 2;
+  const FS_PAGE_SIZE   = 15;
+
+  let fsTimer          = null;
+  let fsAbort          = null;
+  let fsSelectedSource = null;
+
+  function initFoodSearch() {
+    el.dbInput?.addEventListener('input', handleDbSearchInput);
+    el.dbClear?.addEventListener('click', clearDbSearch);
+    el.dbResults?.addEventListener('click', handleDbResultClick);
+    el.dbSourceReset?.addEventListener('click', clearForm);
+
+    // Close dropdown when clicking outside the search area
+    document.addEventListener('click', (e) => {
+      if (!el.dbSearch?.contains(e.target) && el.dbResults) {
+        el.dbResults.innerHTML = '';
+      }
+    });
+  }
+
+  function handleDbSearchInput(e) {
+    const query = e.target.value.trim();
+    el.dbSearch?.classList.toggle('fl-has-query', query.length > 0);
+
+    if (query.length < FS_MIN_LEN) {
+      if (el.dbResults) el.dbResults.innerHTML = '';
+      clearTimeout(fsTimer);
+      fsAbort?.abort();
+      return;
+    }
+
+    if (el.dbResults) el.dbResults.innerHTML = buildDbLoadingHTML();
+
+    clearTimeout(fsTimer);
+    fsAbort?.abort();
+    fsTimer = setTimeout(() => fetchDbResults(query), FS_DEBOUNCE);
+  }
+
+  async function fetchDbResults(query) {
+    fsAbort = new AbortController();
+    try {
+      const params = new URLSearchParams({
+        search_terms: query,
+        action:       'process',
+        json:         '1',
+        page_size:    String(FS_PAGE_SIZE),
+        fields:       'product_name,brands,serving_size,nutriments',
+        sort_by:      'unique_scans_n',
+      });
+      const res  = await fetch(`${OFF_URL}?${params}`, {
+        signal:  fsAbort.signal,
+        headers: { 'Accept': 'application/json' },
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      renderDbResults(data.products || [], query);
+    } catch (err) {
+      if (err.name === 'AbortError') return;
+      if (el.dbResults) el.dbResults.innerHTML = buildDbErrorHTML();
+    }
+  }
+
+  /**
+   * Map a raw Open Food Facts product to usable macro object.
+   * Prefers per-serving values; falls back to per-100g.
+   */
+  function mapDbProduct(product) {
+    const n          = product.nutriments || {};
+    const hasServing = product.serving_size && n['energy-kcal_serving'] != null;
+    const suffix     = hasServing ? '_serving' : '_100g';
+    const servLabel  = hasServing ? `per ${product.serving_size}` : 'per 100g';
+
+    const calories = Math.round(n[`energy-kcal${suffix}`] ?? n['energy-kcal_100g'] ?? 0);
+    const protein  = Math.round((n[`proteins${suffix}`]      ?? n['proteins_100g']      ?? 0) * 10) / 10;
+    const carbs    = Math.round((n[`carbohydrates${suffix}`] ?? n['carbohydrates_100g'] ?? 0) * 10) / 10;
+    const fats     = Math.round((n[`fat${suffix}`]           ?? n['fat_100g']           ?? 0) * 10) / 10;
+
+    if (!calories && !protein && !carbs && !fats) return null;
+
+    const name  = (product.product_name || '').trim();
+    if (!name) return null;
+
+    const brand = product.brands ? product.brands.split(',')[0].trim() : '';
+    const displayName = brand ? `${name} — ${brand}` : name;
+
+    return { displayName, calories, protein, carbs, fats, servLabel };
+  }
+
+  function renderDbResults(products, query) {
+    const mapped = products.map(mapDbProduct).filter(Boolean);
+    if (!el.dbResults) return;
+    el.dbResults.innerHTML = mapped.length
+      ? mapped.map((item, i) => buildDbResultHTML(item, i)).join('')
+      : buildDbEmptyHTML(query);
+  }
+
+  function buildDbResultHTML(item, index) {
+    const d = (v) => String(v).replace(/"/g, '&quot;');
+    return `
+      <div class="fl-db-result"
+           data-name="${d(item.displayName)}"
+           data-calories="${item.calories}"
+           data-protein="${item.protein}"
+           data-carbs="${item.carbs}"
+           data-fats="${item.fats}"
+           data-serv="${d(item.servLabel)}"
+           style="animation-delay:${index * 20}ms"
+           role="option">
+        <div class="fl-db-result-info">
+          <div class="fl-db-result-name">${escapeHtml(item.displayName)}</div>
+          <div class="fl-db-result-macros">
+            <span class="fl-db-pill fl-db-pill--cal">${item.calories} kcal</span>
+            <span class="fl-db-pill fl-db-pill--protein">P ${item.protein}g</span>
+            <span class="fl-db-pill fl-db-pill--carbs">C ${item.carbs}g</span>
+            <span class="fl-db-pill fl-db-pill--fats">F ${item.fats}g</span>
+            <span class="fl-db-pill fl-db-pill--serv">${escapeHtml(item.servLabel)}</span>
+          </div>
+        </div>
+        <button class="fl-db-result-select" type="button" tabindex="-1" aria-hidden="true">USE</button>
+      </div>`;
+  }
+
+  function handleDbResultClick(e) {
+    const row = e.target.closest('.fl-db-result');
+    if (!row) return;
+
+    const { name, calories, protein, carbs, fats, serv } = row.dataset;
+
+    // Populate form fields
+    if (el.name)     el.name.value     = name;
+    if (el.calories) el.calories.value = calories;
+    if (el.protein)  el.protein.value  = protein;
+    if (el.carbs)    el.carbs.value    = carbs;
+    if (el.fats)     el.fats.value     = fats;
+
+    updatePreview();
+    updateAutocalHint();
+
+    // Show source badge
+    fsSelectedSource = name;
+    if (el.dbSourceText) {
+      el.dbSourceText.textContent = `Macros from Open Food Facts · ${serv}`;
+    }
+    el.dbSourceRow?.classList.add('visible');
+
+    // Collapse dropdown and reset search input
+    if (el.dbResults) el.dbResults.innerHTML = '';
+    if (el.dbInput)   el.dbInput.value = '';
+    el.dbSearch?.classList.remove('fl-has-query');
+
+    // Advance focus to meal selector
+    el.mealSel?.querySelector('.fl-meal-btn')?.focus();
+  }
+
+  function clearDbSearch() {
+    if (el.dbInput) el.dbInput.value = '';
+    if (el.dbResults) el.dbResults.innerHTML = '';
+    el.dbSearch?.classList.remove('fl-has-query');
+    clearTimeout(fsTimer);
+    fsAbort?.abort();
+    el.dbInput?.focus();
+  }
+
+  function buildDbLoadingHTML() {
+    return `
+      <div class="fl-db-state fl-db-loading">
+        <div class="fl-db-spinner"></div>
+        <span class="fl-db-state-text">Searching Open Food Facts...</span>
+      </div>`;
+  }
+
+  function buildDbEmptyHTML(query) {
+    return `
+      <div class="fl-db-state">
+        <span class="fl-db-state-text">
+          No results for "${escapeHtml(query)}" — try a simpler term, or fill the fields below manually.
+        </span>
+      </div>`;
+  }
+
+  function buildDbErrorHTML() {
+    return `
+      <div class="fl-db-state">
+        <span class="fl-db-state-text">
+          Could not reach Open Food Facts. Check your connection, or enter macros manually below.
+        </span>
+      </div>`;
+  }
+
   /* ─── INIT ───────────────────────────────────────────── */
   function init() {
     // Bail early if panel isn't in the DOM
@@ -598,6 +803,9 @@ const FoodLogger = (() => {
     // Wire form events
     el.form?.addEventListener('submit', handleSubmit);
     el.clearBtn?.addEventListener('click', clearForm);
+
+    // Food database search
+    initFoodSearch();
 
     // Live preview — update on any input change
     [el.calories, el.protein, el.carbs, el.fats].forEach(inp => {
