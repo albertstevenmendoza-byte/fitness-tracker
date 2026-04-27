@@ -1,0 +1,13 @@
+{
+  "name": "Shredded — Fitness Tracker",
+  "short_name": "Shredded",
+  "description": "Science-based lean muscle & recomposition tracker",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0d0d0d",
+  "theme_color": "#c0392b",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
