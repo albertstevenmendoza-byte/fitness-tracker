@@ -25,8 +25,13 @@
   --nav-h:68px; --top-h:56px; --radius:6px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-weight:400;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+html{font-size:16px;-webkit-text-size-adjust:100%;scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-weight:400;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;position:relative}
+/* iOS input fixes — prevents zoom on focus and keyboard jump */
+input,select,textarea{font-size:16px;max-width:100%}
+input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;cursor:pointer}
+*{-webkit-touch-callout:none}
 button{border:none;background:none;cursor:pointer;font-family:inherit;color:inherit}
 input{font-family:inherit;color:inherit;background:none;border:none;outline:none}
 svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -167,25 +172,36 @@ svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-lin
 .exercise-name{font-family:var(–font-head);font-size:15px;font-weight:800;color:var(–text)}
 .exercise-prescribed{font-size:12px;color:var(–text2);margin-top:2px;font-family:var(–font-mono)}
 .exercise-sets-done{font-family:var(–font-mono);font-size:12px;font-weight:700;color:var(–green)}
-.exercise-body{padding:0 14px 14px;border-top:1px solid var(–border);display:none;background:var(–bg2)}
+.exercise-body{padding:0 12px 16px;border-top:1px solid var(–border);display:none;background:var(–bg2)}
 .exercise-card.open .exercise-body{display:block}
 .exercise-card.open .exercise-header{border-bottom:1px solid var(–border)}
-.set-log-header{display:grid;grid-template-columns:28px 1fr 1fr 1fr 40px;gap:6px;padding:8px 0 4px;font-family:var(–font-mono);font-size:9px;font-weight:700;letter-spacing:1px;color:var(–text3)}
-.set-row{display:grid;grid-template-columns:28px 1fr 1fr 1fr 40px;gap:6px;align-items:center;padding:4px 0;border-top:1px solid var(–border);font-size:13px;color:var(–text2)}
+
+/* Logged sets table */
+.set-log-header{display:grid;grid-template-columns:32px 1fr 1fr 1fr 44px;gap:4px;padding:10px 0 6px;font-family:var(–font-mono);font-size:9px;font-weight:700;letter-spacing:1px;color:var(–text3);text-align:center}
+.set-log-header div:first-child{text-align:left}
+.set-row{display:grid;grid-template-columns:32px 1fr 1fr 1fr 44px;gap:4px;align-items:center;padding:8px 0;border-top:1px solid var(–border);font-size:14px;color:var(–text2);text-align:center}
+.set-row div:first-child{text-align:left}
 .set-num{font-family:var(–font-mono);font-weight:700;color:var(–text3);font-size:11px}
-.set-del{color:var(–red);font-size:16px;display:flex;align-items:center;justify-content:center;min-height:36px}
-.set-input-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
-.set-input-group{display:flex;flex-direction:column;gap:4px}
-.set-input-group label{font-family:var(–font-mono);font-size:9px;font-weight:700;letter-spacing:1px;color:var(–text3)}
-.set-input-wrap{display:flex;align-items:center;background:var(–bg2);border:1px solid var(–border);border-radius:8px;overflow:hidden}
-.set-spinner{width:36px;height:44px;display:flex;align-items:center;justify-content:center;background:var(–bg3);font-size:18px;color:var(–text2);flex-shrink:0;-webkit-tap-highlight-color:transparent}
+.set-del{color:var(–red);font-size:20px;display:flex;align-items:center;justify-content:center;min-height:44px;min-width:44px}
+
+/* Input section — stacked layout, full width, thumb-friendly */
+.set-input-section{margin-top:14px;display:flex;flex-direction:column;gap:10px}
+.set-input-group{display:flex;flex-direction:column;gap:6px}
+.set-input-group label{font-family:var(–font-mono);font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(–text2);text-transform:uppercase}
+.set-input-wrap{display:flex;align-items:stretch;background:#fff;border:2px solid var(–border);border-radius:10px;overflow:hidden;height:56px}
+.set-input-wrap:focus-within{border-color:var(–gold)}
+.set-spinner{width:56px;display:flex;align-items:center;justify-content:center;background:var(–bg3);font-size:22px;color:var(–text);flex-shrink:0;-webkit-tap-highlight-color:transparent;border:none;cursor:pointer;font-weight:300}
 .set-spinner:active{background:var(–bg4)}
-.set-input-field{flex:1;text-align:center;height:44px;font-family:var(–font-head);font-size:18px;font-weight:700;background:none;border:none;outline:none;min-width:0;color:var(–text)}
-.set-input-field::placeholder{color:var(–text3)}
-input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
-.log-set-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#150804;color:#c8a050;font-family:var(–font-display);font-size:15px;font-weight:800;letter-spacing:2px;padding:14px;border-radius:8px;margin-top:12px;min-height:52px}
-.log-set-btn:active{background:#0a0400}
-.log-set-btn svg{width:16px;height:16px}
+.set-input-field{flex:1;text-align:center;font-family:var(–font-head);font-size:22px;font-weight:700;background:none;border:none;outline:none;min-width:0;color:var(–text);padding:0 4px}
+.set-input-field::placeholder{color:var(–text3);font-size:18px}
+
+/* Row layout for weight + reps side by side, RPE full width below */
+.set-input-top-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.set-input-rpe{margin-top:0}
+
+.log-set-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:#150804;color:#c8a050;font-family:var(–font-display);font-size:16px;letter-spacing:2px;padding:16px;border-radius:10px;margin-top:14px;min-height:58px;-webkit-tap-highlight-color:transparent}
+.log-set-btn:active{background:#0a0400;transform:scale(0.98)}
+.log-set-btn svg{width:18px;height:18px}
 .last-session{background:var(–bg3);border-radius:8px;padding:10px 12px;margin:10px 0 8px;border:1px solid var(–border)}
 .last-session__header{display:flex;align-items:center;gap:8px;margin-bottom:6px}
 .last-session__label{font-family:var(–font-mono);font-size:9px;font-weight:700;letter-spacing:2px;color:var(–text3)}
@@ -1000,7 +1016,7 @@ const App={
     }
     const recHtml=`<div class="rec-card" style="border-left-color:${recColor}"><div class="rec-card__top"><span class="rec-icon" style="color:${recColor}">${recIcon}</span><span class="rec-card__msg">${prog.message}</span></div><div class="rec-card__detail"><span class="rec-detail-item"><span style="color:var(--text3)">INCREMENT</span><strong>${inc} lbs</strong></span>${pr?`<span class="rec-detail-item"><span style="color:var(--text3)">YOUR PR</span><strong style="color:var(--gold)">${pr.weight} lbs</strong></span>`:''}<span class="rec-detail-item"><span style="color:var(--text3)">TARGET</span><strong>${ex.prescribed}</strong></span></div></div>`;
     const open=sets.length>0;
-    return`<div class="exercise-card ${open?'open':''}" id="exc${ei}"><div class="exercise-header" onclick="App.toggleExercise(${ei})"><div class="exercise-num">${ei+1}</div><div><div class="exercise-name">${ex.name}${pr&&sets.some(s=>s.weight>=pr.weight)?'<span class="pr-badge">PR 🏆</span>':''}</div><div class="exercise-prescribed">${ex.prescribed} · ${ex.rpe}</div></div><div class="exercise-sets-done">${sets.length>0?sets.length+' sets':''}</div></div><div class="exercise-body">${lastHtml}${recHtml}${sets.length>0?`<div class="set-log-header"><div>#</div><div>Weight</div><div>Reps</div><div>RPE</div><div></div></div>${sets.map((s,si)=>`<div class="set-row"><div class="set-num">${si+1}</div><div>${s.weight??'–'} lbs</div><div>${s.reps??'–'}</div><div>${s.rpe??'–'}</div><div class="set-del" onclick="App.deleteSet(${s.id},'${ex.name.replace(/'/g,"\\'")}',${ei})">×</div></div>`).join('')}`:''}<div class="set-input-row"><div class="set-input-group"><label>WEIGHT (lbs)</label><div class="set-input-wrap"><button class="set-spinner" onclick="App.spin('w${ei}',-${inc})">−</button><input type="number" id="w${ei}" class="set-input-field" value="${prog.suggestedWeight??''}" placeholder="${prog.suggestedWeight??'lbs'}" inputmode="decimal" pattern="[0-9.]*"><button class="set-spinner" onclick="App.spin('w${ei}',${inc})">+</button></div></div><div class="set-input-group"><label>REPS</label><div class="set-input-wrap"><button class="set-spinner" onclick="App.spin('r${ei}',-1)">−</button><input type="text" id="r${ei}" class="set-input-field" placeholder="8" inputmode="numeric" pattern="[0-9]*"><button class="set-spinner" onclick="App.spin('r${ei}',1)">+</button></div></div><div class="set-input-group"><label>RPE</label><div class="set-input-wrap"><button class="set-spinner" onclick="App.spinHalf('rpe${ei}',-0.5)">−</button><input type="text" id="rpe${ei}" class="set-input-field" placeholder="7" inputmode="decimal" pattern="[0-9.]*"><button class="set-spinner" onclick="App.spinHalf('rpe${ei}',0.5)">+</button></div></div></div><button class="log-set-btn" onclick="App.logSet('${ex.name.replace(/'/g,"\\'")}',${ei})"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>LOG SET ${sets.length+1}</button></div></div>`;
+    return`<div class="exercise-card ${open?'open':''}" id="exc${ei}"><div class="exercise-header" onclick="App.toggleExercise(${ei})"><div class="exercise-num">${ei+1}</div><div><div class="exercise-name">${ex.name}${pr&&sets.some(s=>s.weight>=pr.weight)?'<span class="pr-badge">PR 🏆</span>':''}</div><div class="exercise-prescribed">${ex.prescribed} · ${ex.rpe}</div></div><div class="exercise-sets-done">${sets.length>0?sets.length+' sets':''}</div></div><div class="exercise-body">${lastHtml}${recHtml}${sets.length>0?`<div class="set-log-header"><div>#</div><div>Weight</div><div>Reps</div><div>RPE</div><div></div></div>${sets.map((s,si)=>`<div class="set-row"><div class="set-num">${si+1}</div><div>${s.weight??'–'} lbs</div><div>${s.reps??'–'}</div><div>${s.rpe??'–'}</div><div class="set-del" onclick="App.deleteSet(${s.id},'${ex.name.replace(/'/g,"\\'")}',${ei})">×</div></div>`).join('')}`:''}<div class="set-input-section"><div class="set-input-top-row"><div class="set-input-group"><label>Weight (lbs)</label><div class="set-input-wrap"><button class="set-spinner" onclick="event.preventDefault();App.spin('w${ei}',-${inc})">−</button><input type="text" id="w${ei}" class="set-input-field" value="${prog.suggestedWeight??''}" placeholder="${prog.suggestedWeight??'lbs'}" inputmode="decimal" pattern="[0-9.]*" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')"><button class="set-spinner" onclick="event.preventDefault();App.spin('w${ei}',${inc})">+</button></div></div><div class="set-input-group"><label>Reps</label><div class="set-input-wrap"><button class="set-spinner" onclick="event.preventDefault();App.spin('r${ei}',-1)">−</button><input type="text" id="r${ei}" class="set-input-field" placeholder="8" inputmode="numeric" pattern="[0-9]*" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')"><button class="set-spinner" onclick="event.preventDefault();App.spin('r${ei}',1)">+</button></div></div></div><div class="set-input-group set-input-rpe"><label>RPE (1–10 effort scale)</label><div class="set-input-wrap"><button class="set-spinner" onclick="event.preventDefault();App.spinHalf('rpe${ei}',-0.5)">−</button><input type="text" id="rpe${ei}" class="set-input-field" placeholder="7" inputmode="decimal" pattern="[0-9.]*" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')"><button class="set-spinner" onclick="event.preventDefault();App.spinHalf('rpe${ei}',0.5)">+</button></div></div></div><button class="log-set-btn" onclick="App.logSet('${ex.name.replace(/'/g,"\\'")}',${ei})"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>LOG SET ${sets.length+1}</button></div></div>`;
   },
 
   toggleExercise(ei){document.getElementById('exc'+ei).classList.toggle('open')},
