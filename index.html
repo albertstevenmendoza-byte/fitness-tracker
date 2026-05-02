@@ -280,6 +280,33 @@ svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-lin
 .g-name{flex:1;font-size:14px;font-weight:500;color:#150804}
 .g-qty{font-family:‘Space Mono’,monospace;font-size:10px;font-weight:700;color:#6c4824;white-space:nowrap}
 
+/* ── Weekly Ramp Card ──────────────────────────────────────── */
+.ramp-card{background:#150804;border:2px solid #7a5010;border-radius:6px;padding:16px;margin-bottom:14px}
+.ramp-card__week{font-family:‘Space Mono’,monospace;font-size:10px;font-weight:700;letter-spacing:3px;color:#c8a050;margin-bottom:4px}
+.ramp-card__label{font-family:‘Rye’,cursive;font-size:18px;color:#f0e4cc;margin-bottom:12px;line-height:1.2}
+.ramp-progress{margin-bottom:12px}
+.ramp-progress__bar{height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;margin-bottom:6px}
+.ramp-progress__fill{height:100%;background:linear-gradient(90deg,#7a5010,#c8a050);border-radius:4px;transition:width 0.5s ease}
+.ramp-progress__labels{display:flex;justify-content:space-between;font-family:‘Space Mono’,monospace;font-size:9px;color:rgba(200,160,80,0.6)}
+.ramp-targets{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.ramp-target{background:rgba(255,255,255,0.06);border:1px solid rgba(122,80,16,0.4);border-radius:6px;padding:8px;text-align:center}
+.ramp-target__val{font-family:‘Playfair Display’,serif;font-size:20px;font-weight:800;color:#f0e4cc;line-height:1}
+.ramp-target__name{font-family:‘Space Mono’,monospace;font-size:9px;color:rgba(200,160,80,0.7);margin-top:2px;letter-spacing:1px}
+.ramp-week-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:12px}
+.ramp-week-dot{display:flex;flex-direction:column;align-items:center;gap:3px}
+.ramp-week-dot__circle{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:‘Space Mono’,monospace;font-size:9px;font-weight:700;border:1px solid rgba(122,80,16,0.4);color:rgba(200,160,80,0.4)}
+.ramp-week-dot__circle.done{background:rgba(30,62,20,0.4);border-color:rgba(30,62,20,0.6);color:#a0c890}
+.ramp-week-dot__circle.current{background:#7a5010;border-color:#c8a050;color:#f0e4cc;box-shadow:0 0 8px rgba(200,160,80,0.3)}
+.ramp-week-dot__cal{font-family:‘Space Mono’,monospace;font-size:8px;color:rgba(200,160,80,0.5)}
+.ramp-week-dot__circle.done + .ramp-week-dot__cal{color:#a0c890}
+.ramp-week-dot__circle.current + .ramp-week-dot__cal{color:#c8a050;font-weight:700}
+.ramp-next{font-family:‘Lora’,serif;font-size:12px;color:rgba(200,160,80,0.7);text-align:center;padding-top:8px;border-top:1px solid rgba(122,80,16,0.3)}
+.ramp-start-section{margin-top:10px;padding-top:10px;border-top:1px solid rgba(122,80,16,0.3);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ramp-start-label{font-family:‘Space Mono’,monospace;font-size:9px;color:rgba(200,160,80,0.7);letter-spacing:1px;flex-shrink:0}
+.ramp-start-input{flex:1;min-width:120px;background:rgba(255,255,255,0.08);border:1px solid rgba(122,80,16,0.5);border-radius:6px;padding:6px 10px;font-family:‘Space Mono’,monospace;font-size:11px;color:#f0e4cc;outline:none;color-scheme:dark}
+.ramp-start-btn{font-family:‘Space Mono’,monospace;font-size:10px;font-weight:700;letter-spacing:1px;color:#c8a050;background:rgba(122,80,16,0.3);border:1px solid rgba(122,80,16,0.6);border-radius:6px;padding:6px 12px;min-height:32px;white-space:nowrap}
+.ramp-no-start{font-family:‘Lora’,serif;font-size:13px;color:rgba(200,160,80,0.8);text-align:center;margin-bottom:10px}
+
 /* Toast */
 .toast{position:fixed;bottom:calc(68px + 12px);left:50%;transform:translateX(-50%) translateY(10px);background:#150804;color:#c8a050;border:1px solid #7a5010;border-radius:4px;padding:10px 18px;font-family:‘Space Mono’,monospace;font-size:11px;font-weight:700;letter-spacing:1px;z-index:200;opacity:0;transition:opacity 0.2s,transform 0.2s;pointer-events:none;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -421,6 +448,7 @@ svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-lin
 
   <section class="tab-section active" id="tab-dashboard">
     <div class="readiness-card" id="readinessCard"></div>
+    <div id="rampCard"></div>
     <div class="phase-hero" id="phaseHero"></div>
     <div class="dash-grid" id="dashGrid"></div>
     <div class="section-heading">SELECT PHASE</div>
@@ -967,6 +995,88 @@ function toast(msg,dur=2200){
   if(!el){el=document.createElement('div');el.id='gToast';el.className='toast';document.body.appendChild(el)}
   el.textContent=msg;el.classList.add('show');
   setTimeout(()=>el.classList.remove('show'),dur);
+}
+
+// ═══════════════════════════════════════════════════════════
+// WEEKLY CALORIE RAMP
+// Science: gradual ramp prevents fat-storage rebound (post-deficit
+// lipoprotein lipase upregulation). ~100 cal/week increases allow
+// the body to partition new calories toward muscle rather than fat.
+// Phases mark training structure changes; calories are independent.
+// ═══════════════════════════════════════════════════════════
+const WEEKLY_RAMP = [
+  // Phase 1 — Short-term cut / neural re-adaptation
+  // Aggressive deficit is defensible due to detrained myonuclei (Bruusgaard 2010)
+  { week:1, cal:1500, phase:1, protein:150, carbs:147, fat:16,
+    label:'Neural Reset',
+    note:'Connective tissue adaptation. Motor patterns reestablishing.' },
+  { week:2, cal:1600, phase:1, protein:155, carbs:163, fat:17,
+    label:'Pattern Consolidation',
+    note:'+100 cal — carbs added to support increasing training quality.' },
+  { week:3, cal:1700, phase:1, protein:160, carbs:179, fat:19,
+    label:'Metabolic Adjustment',
+    note:'+100 cal — body confirms caloric ramp is not a rebound signal.' },
+  // Phase 2 — Upper/Lower split begins, caloric bridge
+  { week:4, cal:1800, phase:2, protein:165, carbs:195, fat:20,
+    label:'Caloric Bridge Begins',
+    note:'+100 cal · 4th training day added. More volume demands more fuel.' },
+  { week:5, cal:1875, phase:2, protein:170, carbs:206, fat:21,
+    label:'Approaching Maintenance',
+    note:'+75 cal — slower ramp as you near TDEE. Leptin levels normalizing.' },
+  { week:6, cal:1950, phase:2, protein:175, carbs:218, fat:22,
+    label:'Near-Maintenance',
+    note:'+75 cal — deficit narrows. Anabolic environment beginning to shift.' },
+  // Phase 3 — True recomposition calories
+  // At ~2,050 cal with TDEE ~2,410, deficit is ~360 cal — the sweet spot
+  // for simultaneous fat loss and muscle gain per Barakat et al. (2020)
+  { week:7, cal:2050, phase:3, protein:189, carbs:255, fat:28,
+    label:'True Recomp',
+    note:'~360 cal deficit. Muscle gain + fat loss simultaneously achievable here.' },
+  { week:8, cal:2050, phase:3, protein:189, carbs:255, fat:28,
+    label:'True Recomp',
+    note:'Hold here. Re-evaluate calories if weight stalls for 3+ weeks.' },
+];
+
+/**
+ * Returns days elapsed since program start.
+ * Returns null if no start date set.
+ */
+function getProgramDays() {
+  const startDate = Store.get('programStartDate', null);
+  if (!startDate) return null;
+  const start = new Date(startDate + 'T00:00:00');
+  const now = new Date();
+  return Math.max(0, Math.floor((now - start) / (1000 * 60 * 60 * 24)));
+}
+
+/**
+ * Returns current week number (1-indexed).
+ * Caps at last week in WEEKLY_RAMP.
+ */
+function getCurrentWeekNum() {
+  const days = getProgramDays();
+  if (days === null) return null;
+  return Math.min(Math.floor(days / 7) + 1, WEEKLY_RAMP.length);
+}
+
+/**
+ * Returns the ramp data object for the current week.
+ * Falls back to week 1 if no start date set.
+ */
+function getCurrentWeekData() {
+  const week = getCurrentWeekNum();
+  if (!week) return WEEKLY_RAMP[0];
+  return WEEKLY_RAMP[week - 1];
+}
+
+/**
+ * Days until next week's calorie increase.
+ */
+function getDaysUntilNextWeek() {
+  const days = getProgramDays();
+  if (days === null) return null;
+  const daysIntoCurrentWeek = days % 7;
+  return 7 - daysIntoCurrentWeek;
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1730,17 +1840,75 @@ const App={
 
   // ── Dashboard ──────────────────────────────────────────────
   renderDashboard(){
-    const p=PHASES[State.phase];
-    document.getElementById('phaseHero').innerHTML=`<div class="phase-hero__label">PHASE ${State.phase} · ${p.weeks}</div><div class="phase-hero__name">${p.shortName}</div><div class="phase-hero__desc">${p.desc}</div>`;
-    const t=p.targets;
+    const weekData = getCurrentWeekData();
+    const weekNum  = getCurrentWeekNum();
+    const p = PHASES[weekData.phase];
+
+    // ── Ramp Card ─────────────────────────────────────────
+    const startDate = Store.get('programStartDate', null);
+    const totalWeeks = WEEKLY_RAMP.length;
+    const progressPct = weekNum ? Math.round(((weekNum-1) / (totalWeeks-1)) * 100) : 0;
+    const daysNext = getDaysUntilNextWeek();
+    const nextWeek = weekNum && weekNum < totalWeeks ? WEEKLY_RAMP[weekNum] : null;
+
+    const dotHtml = WEEKLY_RAMP.map((w, i) => {
+      const wk = i + 1;
+      const isDone = weekNum && wk < weekNum;
+      const isCurrent = weekNum && wk === weekNum;
+      const cls = isDone ? 'done' : isCurrent ? 'current' : '';
+      return `<div class="ramp-week-dot">
+        <div class="ramp-week-dot__circle ${cls}">${wk}</div>
+        <div class="ramp-week-dot__cal">${w.cal}</div>
+      </div>`;
+    }).join('');
+
+    const rampInner = startDate ? `
+      <div class="ramp-card__week">WEEK ${weekNum || 1} OF ${totalWeeks} · PHASE ${weekData.phase}</div>
+      <div class="ramp-card__label">${weekData.label}</div>
+      <div class="ramp-progress">
+        <div class="ramp-progress__bar"><div class="ramp-progress__fill" style="width:${progressPct}%"></div></div>
+        <div class="ramp-progress__labels"><span>1,500 cal</span><span>${weekData.cal} cal today</span><span>2,050 cal</span></div>
+      </div>
+      <div class="ramp-targets">
+        <div class="ramp-target"><div class="ramp-target__val">${weekData.cal}</div><div class="ramp-target__name">CALORIES</div></div>
+        <div class="ramp-target"><div class="ramp-target__val">${weekData.protein}g</div><div class="ramp-target__name">PROTEIN</div></div>
+        <div class="ramp-target"><div class="ramp-target__val">${weekData.carbs}g</div><div class="ramp-target__name">CARBS</div></div>
+      </div>
+      <div class="ramp-week-grid">${dotHtml}</div>
+      ${nextWeek
+        ? `<div class="ramp-next">In ${daysNext} day${daysNext===1?'':'s'} → ${nextWeek.cal} cal · ${nextWeek.label}</div>`
+        : `<div class="ramp-next">🎯 You've reached full recomp calories. Hold and build.</div>`}
+      <div class="ramp-start-section">
+        <span class="ramp-start-label">START DATE</span>
+        <input type="date" class="ramp-start-input" id="startDateInput" value="${startDate||today()}" max="${today()}">
+        <button class="ramp-start-btn" onclick="App.setStartDate()">UPDATE</button>
+      </div>` : `
+      <div class="ramp-card__week">CALORIE RAMP · ${totalWeeks}-WEEK PROGRESSION</div>
+      <div class="ramp-card__label">1,500 → 2,050 cal</div>
+      <div class="ramp-no-start">Set your program start date to auto-track your weekly calorie target.</div>
+      <div class="ramp-week-grid">${dotHtml}</div>
+      <div class="ramp-start-section">
+        <span class="ramp-start-label">PROGRAM STARTED</span>
+        <input type="date" class="ramp-start-input" id="startDateInput" value="${today()}" max="${today()}">
+        <button class="ramp-start-btn" onclick="App.setStartDate()">SET DATE</button>
+      </div>`;
+
+    document.getElementById('rampCard').innerHTML = `<div class="ramp-card">${rampInner}</div>`;
+
+    // ── Phase hero uses active phase from ramp ─────────────
+    document.getElementById('phaseHero').innerHTML=`<div class="phase-hero__label">PHASE ${weekData.phase} · ${p.weeks}</div><div class="phase-hero__name">${p.shortName}</div><div class="phase-hero__desc">${weekData.note}</div>`;
+
+    // ── Stat cards use THIS WEEK's targets ─────────────────
     document.getElementById('dashGrid').innerHTML=`
-      <div class="stat-card stat-card--red"><div class="stat-card__label">CALORIES</div><div class="stat-card__val">${t.cal}<span class="stat-card__unit">cal</span></div></div>
-      <div class="stat-card stat-card--green"><div class="stat-card__label">PROTEIN</div><div class="stat-card__val">${t.protein}<span class="stat-card__unit">g</span></div></div>
+      <div class="stat-card stat-card--red"><div class="stat-card__label">THIS WEEK</div><div class="stat-card__val">${weekData.cal}<span class="stat-card__unit">cal</span></div></div>
+      <div class="stat-card stat-card--green"><div class="stat-card__label">PROTEIN</div><div class="stat-card__val">${weekData.protein}<span class="stat-card__unit">g</span></div></div>
       <div class="stat-card stat-card--blue"><div class="stat-card__label">TRAINING</div><div class="stat-card__val" style="font-size:15px;margin-top:4px">${p.training}</div></div>
       <div class="stat-card stat-card--gold"><div class="stat-card__label">INTENSITY</div><div class="stat-card__val" style="font-size:17px;margin-top:4px">${p.rpe}</div></div>`;
-    document.getElementById('phaseSelector').innerHTML=[1,2,3].map(n=>{const ph=PHASES[n];return`<button class="phase-btn ${State.phase===n?'selected':''}" onclick="App.setPhase(${n})"><div class="phase-btn__num">${n}</div><div><div class="phase-btn__name">${ph.shortName}</div><div class="phase-btn__meta">${ph.weeks} · ${ph.targets.cal} cal/day</div></div><div class="phase-btn__check"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div></button>`}).join('');
+
+    document.getElementById('phaseSelector').innerHTML=[1,2,3].map(n=>{const ph=PHASES[n];return`<button class="phase-btn ${weekData.phase===n?'selected':''}" onclick="App.setPhase(${n})"><div class="phase-btn__num">${n}</div><div><div class="phase-btn__name">${ph.shortName}</div><div class="phase-btn__meta">${ph.weeks} · ${ph.targets.cal}→${n===1?1700:n===2?1950:2050} cal</div></div><div class="phase-btn__check"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div></button>`}).join('');
+
     const mealsCompleted=Object.values(State.mealLogs).filter(Boolean).length;
-    const totalMeals=PHASES[State.phase].meals.length;
+    const totalMeals=p.meals.length;
     const setsToday=Object.values(State.sessionSets).reduce((a,s)=>a+s.length,0);
     const lastBody=State.bodyEntries[0];
     document.getElementById('glanceCards').innerHTML=`
@@ -1749,11 +1917,31 @@ const App={
       <div class="glance-item"><div class="glance-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="glance-text"><div class="glance-label">LAST WEIGH-IN</div><div class="glance-val">${lastBody?lastBody.weight+' lbs · '+formatDate(lastBody.date):'No entries yet'}</div></div></div>`;
   },
 
-  setPhase(n){State.phase=n;State.mealLogs={};State.mealOptions={};Store.set('phase',n);this.updateHeader();this.renderDashboard();this.renderMeals();this.renderWorkout();toast('Switched to Phase '+n)},
+  setStartDate() {
+    const input = document.getElementById('startDateInput');
+    const val = input?.value;
+    if (!val) { toast('Pick a date first'); return; }
+    Store.set('programStartDate', val);
+    this.renderDashboard();
+    this.renderMeals();
+    const wk = getCurrentWeekNum();
+    toast(`Week ${wk} · ${getCurrentWeekData().cal} cal target set ✓`);
+  },
+
+  setPhase(n){
+    State.phase=n;State.mealLogs={};State.mealOptions={};
+    Store.set('phase',n);
+    this.updateHeader();this.renderDashboard();this.renderMeals();this.renderWorkout();
+    toast('Switched to Phase '+n);
+  },
 
   // ── Meals ──────────────────────────────────────────────────
   renderMeals(){
-    const p=PHASES[State.phase],t=p.targets,meals=p.meals;
+    const weekData = getCurrentWeekData();
+    const p = PHASES[weekData.phase];
+    const meals = p.meals;
+    // Use THIS WEEK's targets for the ring and bars
+    const t = { cal: weekData.cal, protein: weekData.protein, carbs: weekData.carbs, fat: weekData.fat };
     let totCal=0,totP=0,totC=0,totF=0;
     meals.forEach((m,i)=>{
       if(State.mealLogs[i]){
@@ -2001,11 +2189,13 @@ const App={
 
   // ── Stats ──────────────────────────────────────────────────
   renderStats(){
-    const p = PHASES[State.phase];
+    const weekData = getCurrentWeekData();
+    const weekNum  = getCurrentWeekNum();
+    const p = PHASES[weekData.phase];
     const bmr = SciCalc.bmr();
     const tdee = SciCalc.tdee(bmr, 'moderate');
-    const macros = SciCalc.macroTargets(147, p.targets.cal, 'recomp');
-    const deficit = p.targets.cal - tdee;
+    const macros = SciCalc.macroTargets(147, weekData.cal, 'recomp');
+    const deficit = weekData.cal - tdee;
 
     // Exercises with history
     const allEx = new Set();
@@ -2033,11 +2223,11 @@ const App={
 
     document.getElementById('statsHeader').innerHTML=`
       <div class="stats-hero">
-        <div class="stats-hero__label">YOUR NUMBERS · PHASE ${State.phase} · MIFFLIN-ST JEOR</div>
+        <div class="stats-hero__label">WEEK ${weekNum||1} · PHASE ${weekData.phase} · ${weekData.label.toUpperCase()}</div>
         <div class="stats-hero__grid">
           <div class="stats-hero__stat"><div class="stats-hero__val">${bmr}</div><div class="stats-hero__name">BMR (cal)</div></div>
           <div class="stats-hero__stat"><div class="stats-hero__val">${tdee}</div><div class="stats-hero__name">TDEE (cal)</div></div>
-          <div class="stats-hero__stat"><div class="stats-hero__val">${macros.protein}g</div><div class="stats-hero__name">PROTEIN 1.9g/kg</div></div>
+          <div class="stats-hero__stat"><div class="stats-hero__val">${weekData.protein}g</div><div class="stats-hero__name">PROTEIN TARGET</div></div>
           <div class="stats-hero__stat"><div class="stats-hero__val" style="color:${deficit<0?'#c89080':'#c8a050'}">${deficit}</div><div class="stats-hero__name">DEFICIT (cal)</div></div>
         </div>
       </div>`;
@@ -2057,12 +2247,12 @@ const App={
             <div class="stat-pill__name">READINESS /5</div>
           </div>
           <div class="stat-pill">
-            <div class="stat-pill__val ${actuals.cal>=p.targets.cal*0.9?'green':'red'}">${actuals.cal}</div>
-            <div class="stat-pill__name">CAL / ${p.targets.cal}</div>
+            <div class="stat-pill__val ${actuals.cal>=weekData.cal*0.9?'green':'red'}">${actuals.cal}</div>
+            <div class="stat-pill__name">CAL / ${weekData.cal}</div>
           </div>
           <div class="stat-pill">
-            <div class="stat-pill__val ${actuals.protein>=p.targets.protein*0.9?'green':'red'}">${actuals.protein}g</div>
-            <div class="stat-pill__name">PROTEIN / ${p.targets.protein}g</div>
+            <div class="stat-pill__val ${actuals.protein>=weekData.protein*0.9?'green':'red'}">${actuals.protein}g</div>
+            <div class="stat-pill__name">PROTEIN / ${weekData.protein}g</div>
           </div>
         </div>
         ${exVolumes.length?`<div class="stats-card"><div class="stats-card__title">Exercise Breakdown</div>${exVolumes.map(e=>`<div class="volume-row"><div class="volume-row__name">${e.name}</div><div style="text-align:right"><div class="volume-row__val">${e.vl.toLocaleString()} lbs</div>${e.best1RM?`<div style="font-family:'Space Mono',monospace;font-size:9px;color:#6c4824">Est. 1RM: ${e.best1RM} lbs</div>`:''}</div></div>`).join('')}</div>`:''}
@@ -2125,7 +2315,7 @@ const App={
 
     setTimeout(()=>{
       Charts.renderMuscleVolumeChart('muscleChart');
-      Charts.renderMacroChart('macroChart',State.phase);
+      Charts.renderMacroChart('macroChart', weekData.phase);
       Charts.renderBodyWeightChart('bodyWeightChart',bodyEntries);
       if(selectedEx){
         const plateau=Charts.renderStrengthChart('strengthChart',selectedEx);
