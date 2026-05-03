@@ -307,7 +307,69 @@ svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-lin
 .ramp-start-btn{font-family:‘Space Mono’,monospace;font-size:10px;font-weight:700;letter-spacing:1px;color:#c8a050;background:rgba(122,80,16,0.3);border:1px solid rgba(122,80,16,0.6);border-radius:6px;padding:6px 12px;min-height:32px;white-space:nowrap}
 .ramp-no-start{font-family:‘Lora’,serif;font-size:13px;color:rgba(200,160,80,0.8);text-align:center;margin-bottom:10px}
 
-/* ── Meal Availability ───────────────────────────────────── */
+/* ── Meal Prep Guide ─────────────────────────────────────── */
+.prep-guide-toggle{display:flex;align-items:center;justify-content:space-between;background:#150804;border:1px solid #7a5010;border-radius:6px;padding:12px 16px;margin-bottom:8px;cursor:pointer}
+.prep-guide-toggle__left{display:flex;flex-direction:column;gap:2px}
+.prep-guide-toggle__label{font-family:‘Space Mono’,monospace;font-size:9px;font-weight:700;letter-spacing:2px;color:#c8a050}
+.prep-guide-toggle__title{font-family:‘Rye’,cursive;font-size:16px;color:#f0e4cc;letter-spacing:2px}
+.prep-guide-toggle__arrow{font-size:20px;color:#c8a050;transition:transform 0.2s}
+.prep-guide-toggle.open .prep-guide-toggle__arrow{transform:rotate(180deg)}
+.prep-guide{background:#150804;border:1px solid #7a5010;border-top:none;border-radius:0 0 6px 6px;padding:16px;margin-top:-8px;margin-bottom:12px;display:none}
+.prep-guide.open{display:block}
+.prep-section-title{font-family:‘Space Mono’,monospace;font-size:9px;font-weight:700;letter-spacing:3px;color:#c8a050;margin:14px 0 8px;padding-bottom:6px;border-bottom:1px solid rgba(122,80,16,0.4)}
+.prep-schedule{background:rgba(122,80,16,0.15);border:1px solid rgba(122,80,16,0.3);border-radius:6px;padding:12px;margin-bottom:10px}
+.prep-batch{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(122,80,16,0.2)}
+.prep-batch:last-of-type{border-bottom:none}
+.prep-batch__label{font-family:‘Space Mono’,monospace;font-size:10px;font-weight:700;color:#c8a050}
+.prep-batch__day{font-family:‘Playfair Display’,serif;font-size:14px;font-weight:800;color:#f0e4cc}
+.prep-batch__covers{font-family:‘Space Mono’,monospace;font-size:9px;color:rgba(200,160,80,0.7)}
+.prep-note{font-family:‘Space Mono’,monospace;font-size:9px;color:rgba(200,160,80,0.6);margin-top:8px;line-height:1.5}
+.prep-qty-row{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-bottom:1px solid rgba(122,80,16,0.15)}
+.prep-qty-row:last-child{border-bottom:none}
+.prep-qty-item{font-family:‘Space Mono’,monospace;font-size:10px;font-weight:700;color:#f0e4cc;min-width:110px;flex-shrink:0}
+.prep-qty-val{font-size:12px;color:rgba(200,160,80,0.8);line-height:1.4}
+.prep-protein-card{background:rgba(30,62,20,0.2);border:1px solid rgba(30,62,20,0.4);border-radius:6px;padding:12px;margin-bottom:8px}
+.prep-protein-name{font-family:‘Playfair Display’,serif;font-size:15px;font-weight:800;color:#a0c890;margin-bottom:4px}
+.prep-protein-method{font-family:‘Space Mono’,monospace;font-size:9px;color:rgba(160,200,144,0.7);margin-bottom:10px;letter-spacing:1px}
+.prep-steps{display:flex;flex-direction:column;gap:4px}
+.prep-step{display:flex;gap:8px;font-size:12px;color:rgba(200,160,80,0.85);line-height:1.4}
+.prep-step-num{font-family:‘Space Mono’,monospace;font-size:10px;font-weight:700;color:#c8a050;flex-shrink:0;width:18px}
+.prep-fridge{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:8px;border-top:1px solid rgba(30,62,20,0.3)}
+.prep-fridge-label{font-family:‘Space Mono’,monospace;font-size:9px;color:rgba(160,200,144,0.6);letter-spacing:1px}
+.prep-fridge-val{font-family:‘Playfair Display’,serif;font-size:14px;font-weight:800;color:#a0c890}
+.prep-tip{font-size:11px;color:rgba(200,160,80,0.6);margin-top:6px;font-style:italic;padding:6px 8px;border-left:2px solid rgba(122,80,16,0.4)}
+.prep-carb-card{background:rgba(26,48,80,0.2);border:1px solid rgba(26,48,80,0.4);border-radius:6px;padding:12px;margin-bottom:8px}
+.prep-carb-name{font-family:‘Playfair Display’,serif;font-size:14px;font-weight:800;color:#a0b8d0;margin-bottom:4px}
+.prep-assembly-item{display:flex;gap:8px;padding:5px 0;font-size:12px;color:rgba(200,160,80,0.8);border-bottom:1px solid rgba(122,80,16,0.15);line-height:1.4}
+.prep-assembly-item:last-child{border-bottom:none}
+.prep-assembly-dot{color:#c8a050;flex-shrink:0}
+
+/* Fridge date tracker */
+.fridge-tracker{margin-bottom:12px}
+.fridge-tracker-title{font-family:‘Space Mono’,monospace;font-size:10px;font-weight:700;letter-spacing:2px;color:#6c4824;margin-bottom:8px}
+.fridge-items{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fridge-item{background:#f0e4cc;border:1px solid #a08850;border-radius:6px;padding:10px;display:flex;flex-direction:column;gap:6px}
+.fridge-item__name{font-family:‘Space Mono’,monospace;font-size:9px;font-weight:700;letter-spacing:1px;color:#3c2010}
+.fridge-item__status{font-family:‘Playfair Display’,serif;font-size:16px;font-weight:800;line-height:1}
+.fridge-item__status.fresh{color:#1e3e14}
+.fridge-item__status.ok{color:#1e3e14}
+.fridge-item__status.warning{color:#7a5010}
+.fridge-item__status.last{color:#6b1e12}
+.fridge-item__status.expired{color:#6b1e12}
+.fridge-item__status.unknown{color:#a08850}
+.fridge-item__label{font-family:‘Space Mono’,monospace;font-size:9px;color:#6c4824}
+.fridge-item__date{display:flex;gap:6px;align-items:center}
+.fridge-date-input{flex:1;background:#fff;border:1px solid #a08850;border-radius:4px;padding:4px 6px;font-family:‘Space Mono’,monospace;font-size:10px;color:#150804;color-scheme:light}
+.fridge-log-btn{font-family:‘Space Mono’,monospace;font-size:9px;font-weight:700;color:#f0e4cc;background:#150804;border:1px solid #7a5010;border-radius:4px;padding:4px 8px;white-space:nowrap}
+
+/* Fridge badge on meal card */
+.fridge-badge{display:inline-flex;align-items:center;gap:3px;font-family:‘Space Mono’,monospace;font-size:8px;font-weight:700;letter-spacing:1px;padding:2px 6px;border-radius:3px;margin-left:4px;vertical-align:middle;flex-shrink:0}
+.fridge-badge–fresh{background:rgba(30,62,20,0.1);color:#1e3e14;border:1px solid rgba(30,62,20,0.25)}
+.fridge-badge–ok{background:rgba(30,62,20,0.08);color:#1e3e14;border:1px solid rgba(30,62,20,0.2)}
+.fridge-badge–warning{background:rgba(122,80,16,0.1);color:#7a5010;border:1px solid rgba(122,80,16,0.3)}
+.fridge-badge–last{background:rgba(107,30,18,0.1);color:#6b1e12;border:1px solid rgba(107,30,18,0.25)}
+.fridge-badge–expired{background:rgba(107,30,18,0.15);color:#6b1e12;border:1px solid #c89080}
+.fridge-badge–unknown{background:#e4d4b0;color:#6c4824;border:1px solid #a08850}
 .avail-badge{display:inline-flex;align-items:center;gap:3px;font-family:‘Space Mono’,monospace;font-size:8px;font-weight:700;letter-spacing:1px;padding:2px 6px;border-radius:3px;margin-left:6px;vertical-align:middle;flex-shrink:0}
 .avail-badge–ok{background:rgba(30,62,20,0.1);color:#1e3e14;border:1px solid rgba(30,62,20,0.25)}
 .avail-badge–missing{background:rgba(107,30,18,0.08);color:#6b1e12;border:1px solid rgba(107,30,18,0.2)}
@@ -493,6 +555,18 @@ svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-lin
   </section>
 
   <section class="tab-section" id="tab-meals">
+    <div class="prep-guide-toggle" id="prepGuideToggle" onclick="App.togglePrepGuide()">
+      <div class="prep-guide-toggle__left">
+        <div class="prep-guide-toggle__label">WEEKLY BATCH COOKING</div>
+        <div class="prep-guide-toggle__title">MEAL PREP PLAN</div>
+      </div>
+      <div class="prep-guide-toggle__arrow">▾</div>
+    </div>
+    <div class="prep-guide" id="prepGuideBody"></div>
+    <div class="fridge-tracker">
+      <div class="fridge-tracker-title">FRIDGE FRESHNESS</div>
+      <div class="fridge-items" id="fridgeTracker"></div>
+    </div>
     <div class="macro-ring-wrap" id="macroRingWrap"></div>
     <div class="macro-bars" id="macroBars"></div>
     <div class="section-heading">TODAY'S MEALS</div>
@@ -616,119 +690,128 @@ const PHASES = {
     training:"3× / week · Full Body",rpe:"RPE 6–7",
     desc:"Gradual reactivation. Hit 150g protein daily. Connective tissue and motor patterns first — strength will come.",
     meals:[
-      // MEAL 1 — 5am — Fast-digesting protein + moderate carbs
-      // Science: Norton & Layman leucine threshold (2.5-3g/meal to trigger MPS)
-      // Whey isolate has highest leucine content (~10.9% by weight) — ideal for morning MPS trigger
+      // ── MEAL 1 · 5:00 AM · BREAKFAST — always made fresh ──────────
+      // All options use your on-hand ingredients: egg whites, oats, bananas, fit butter, whey
+      // Science: whey triggers immediate MPS via leucine threshold (~2.5g/meal)
+      // Fit butter adds healthy fats and slows gastric emptying for sustained energy
       {time:"5:00 AM",label:null,options:[
-        {name:"Protein Oats",cal:341,protein:32,carbs:44,fat:5,
+        {name:"Protein Oat Bowl",cal:302,protein:29,carbs:35,fat:6,fridgeDays:null,
          items:[
-           {name:"Rolled oats, ⅓ cup dry",macro:"7P·36C·3F·200cal"},
+           {name:"Rolled oats, ¼ cup dry",macro:"3P·18C·2F·100cal"},
            {name:"Whey protein, 1 scoop",macro:"25P·3C·2F·120cal"},
-           {name:"Blueberries, ¼ cup",macro:"0P·5C·0F·21cal"},
-           {name:"↳ Oats: low-GI sustained energy · Whey: fastest leucine delivery",macro:""},
+           {name:"Banana, ½ medium sliced in",macro:"0P·13C·0F·52cal"},
+           {name:"Fit butter, 1 tsp",macro:"1P·1C·2F·30cal"},
+           {name:"↳ Cook oats · stir in whey off heat · top with banana + fit butter",macro:""},
          ]},
-        {name:"Bagel + Egg Whites",cal:510,protein:33,carbs:62,fat:12,
+        {name:"Egg White + Whey Oat Bowl",cal:362,protein:48,carbs:35,fat:4,fridgeDays:null,
          items:[
-           {name:"Sprouts NY Bagel",macro:"~11P·~60C·~2F·310cal"},
-           {name:"Nancy's Probiotic Cream Cheese, 2 tbsp",macro:"~2P·1C·~10F·110cal"},
            {name:"Liquid egg whites, ¾ cup",macro:"20P·1C·0F·90cal"},
-           {name:"Whey protein shake (required)",macro:"+25P·3C·2F·120cal"},
-           {name:"↳ Add whey shake — bagel alone won't hit leucine threshold",macro:""},
+           {name:"Whey protein, 1 scoop",macro:"25P·3C·2F·120cal"},
+           {name:"Rolled oats, ¼ cup dry (cooked)",macro:"3P·18C·2F·100cal"},
+           {name:"Banana, ½ medium",macro:"0P·13C·0F·52cal"},
+           {name:"↳ Highest protein breakfast · scramble egg whites · eat oats + whey shake alongside",macro:""},
          ]},
-        {name:"Egg Whites + Oats",cal:360,protein:38,carbs:40,fat:4,
+        {name:"Whey Banana Shake + Oats",cal:325,protein:29,carbs:48,fat:4,fridgeDays:null,
          items:[
-           {name:"Liquid egg whites, 1 cup",macro:"26P·1C·0F·120cal"},
-           {name:"Rolled oats, ⅓ cup dry",macro:"7P·36C·3F·200cal"},
-           {name:"Whey protein, ½ scoop",macro:"12P·1C·1F·60cal"},
-           {name:"Cinnamon, dash",macro:"0P·0C·0F·0cal"},
-           {name:"↳ Egg whites: zero fat, bioavailable protein · Oats: beta-glucan stabilizes insulin",macro:""},
+           {name:"Whey protein, 1 scoop",macro:"25P·3C·2F·120cal"},
+           {name:"Banana, 1 medium",macro:"1P·27C·0F·105cal"},
+           {name:"Rolled oats, ¼ cup dry (blend in)",macro:"3P·18C·2F·100cal"},
+           {name:"↳ Blend everything with ice and water · oats thicken the shake · highest carb breakfast option",macro:""},
+         ]},
+        {name:"Fit Butter Power Shake",cal:375,protein:43,carbs:33,fat:10,fridgeDays:null,
+         items:[
+           {name:"Whey protein, 1 scoop",macro:"25P·3C·2F·120cal"},
+           {name:"Liquid egg whites, ½ cup",macro:"13P·0C·0F·60cal"},
+           {name:"Banana, 1 medium",macro:"1P·27C·0F·105cal"},
+           {name:"Fit butter, 1 tbsp",macro:"4P·3C·8F·90cal"},
+           {name:"↳ Blend all with ice · richest option · fat from fit butter keeps you full until 9am",macro:""},
          ]},
       ]},
-      // MEAL 2 — 9am — Sustained protein + moderate carbs, LOW FAT
-      // Science: keep fat <10g to not slow gastric emptying before 1pm pre-workout meal
-      // Areta et al. 2013 — 40g protein per sitting maximizes 4-hour MPS window
+      // ── MEAL 2 · 9:00 AM · MEAL PREP CONTAINER ────────────────────
+      // Pull from fridge. Microwave 60–90 sec.
+      // Chicken or turkey + one carb source. Keep fat low here.
       {time:"9:00 AM",label:null,options:[
-        {name:"Tuna + Rice",cal:260,protein:39,carbs:23,fat:1,
+        {name:"Chicken + Rice",cal:290,protein:37,carbs:22,fat:3,fridgeDays:4,
          items:[
-           {name:"Canned tuna in water, 5 oz",macro:"36P·0C·1F·150cal"},
+           {name:"Chicken breast, 4 oz cooked",macro:"35P·0C·3F·187cal"},
            {name:"White rice, ½ cup cooked",macro:"2P·22C·0F·103cal"},
-           {name:"Spinach, 1 cup raw",macro:"1P·1C·0F·7cal"},
-           {name:"↳ Tuna: 3.2g leucine ✓ · Near-zero fat preserves digestion window",macro:""},
+           {name:"↳ MEAL PREP · max 4 days refrigerated · microwave 60 sec",macro:""},
          ]},
-        {name:"Chicken + Sweet Potato",cal:302,protein:37,carbs:28,fat:3,
+        {name:"Ground Turkey + Rice",cal:278,protein:30,carbs:22,fat:6,fridgeDays:4,
+         items:[
+           {name:"93/7 Ground turkey, 4 oz cooked",macro:"28P·0C·6F·175cal"},
+           {name:"White rice, ½ cup cooked",macro:"2P·22C·0F·103cal"},
+           {name:"↳ MEAL PREP · max 4 days refrigerated · season with garlic powder pre-cook",macro:""},
+         ]},
+        {name:"Chicken + Sweet Potato",cal:257,protein:36,carbs:16,fat:3,fridgeDays:4,
          items:[
            {name:"Chicken breast, 4 oz cooked",macro:"35P·0C·3F·187cal"},
            {name:"Sweet potato, 1 small",macro:"1P·16C·0F·70cal"},
-           {name:"Broccoli, 1 cup",macro:"3P·6C·0F·31cal"},
-           {name:"↳ Chicken: 4.5g leucine ✓ · Sweet potato: low-GI steady glucose",macro:""},
+           {name:"↳ MEAL PREP · lower GI than rice · good if training in afternoon",macro:""},
          ]},
-        {name:"Shrimp + Rice",cal:280,protein:36,carbs:35,fat:2,
+        {name:"Ground Turkey + Sweet Potato",cal:245,protein:29,carbs:16,fat:6,fridgeDays:4,
          items:[
-           {name:"Shrimp, 5 oz cooked",macro:"29P·0C·2F·140cal"},
-           {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
-           {name:"Spinach + garlic sautéed",macro:"1P·2C·0F·20cal"},
-           {name:"↳ Shrimp: 3.0g leucine ✓ · Selenium + iodine support thyroid function",macro:""},
+           {name:"93/7 Ground turkey, 4 oz cooked",macro:"28P·0C·6F·175cal"},
+           {name:"Sweet potato, 1 small",macro:"1P·16C·0F·70cal"},
+           {name:"↳ MEAL PREP · max 4 days refrigerated · lowest calorie container option",macro:""},
          ]},
       ]},
-      // MEAL 3 — 1pm — PRE-WORKOUT: HIGH carbs, lean protein, FAT <5g
-      // Science: Aragon & Schoenfeld 2013 — pre-workout carbs fuel training
-      // Fat slows digestion — keep under 5g so carbs are available by 3:30pm
+      // ── MEAL 3 · 1:00 PM · PRE-WORKOUT MEAL PREP ──────────────────
+      // Fat <5g. Carbs available for 3:30pm training.
+      // White rice GI ~73 — carbs peak ~90 min after eating.
       {time:"1:00 PM",label:"pre",options:[
-        {name:"Tuna + White Rice",cal:330,protein:40,carbs:39,fat:1,
-         items:[
-           {name:"Canned tuna in water, 5 oz",macro:"36P·0C·1F·150cal"},
-           {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
-           {name:"Hot sauce or salsa, 2 tbsp",macro:"0P·2C·0F·10cal"},
-           {name:"↳ White rice GI ~73: carbs available in ~90 min · Tuna fat <1g ✓",macro:""},
-         ]},
-        {name:"Chicken + White Rice",cal:342,protein:44,carbs:34,fat:4,
+        {name:"Chicken + White Rice",cal:342,protein:38,carbs:34,fat:3,fridgeDays:4,
          items:[
            {name:"Chicken breast, 4 oz cooked",macro:"35P·0C·3F·187cal"},
            {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
-           {name:"Spinach, 1 cup raw",macro:"1P·1C·0F·7cal"},
-           {name:"↳ Chicken: clean protein, fat <4g total · Carbs peak at 2-2.5hr post-meal",macro:""},
+           {name:"↳ MEAL PREP · pull from fridge 30 min before eating · fat <3g ✓",macro:""},
          ]},
-        {name:"Cod + Sweet Potato",cal:300,protein:38,carbs:30,fat:2,
+        {name:"Ground Turkey + White Rice",cal:330,protein:31,carbs:34,fat:6,fridgeDays:4,
          items:[
-           {name:"Cod or tilapia, 5 oz cooked",macro:"36P·0C·2F·180cal"},
-           {name:"Sweet potato, 1 small",macro:"1P·16C·0F·70cal"},
-           {name:"Broccoli, ½ cup steamed",macro:"1P·3C·0F·16cal"},
-           {name:"↳ Cod: leanest fish option · Sweet potato: moderate GI, steady energy",macro:""},
+           {name:"93/7 Ground turkey, 4 oz cooked",macro:"28P·0C·6F·175cal"},
+           {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
+           {name:"↳ MEAL PREP · fat slightly higher with turkey — eat by 12:30 if training at 3:30",macro:""},
+         ]},
+        {name:"Chicken + Rice + Banana",cal:342,protein:37,carbs:35,fat:3,fridgeDays:4,
+         items:[
+           {name:"Chicken breast, 4 oz cooked",macro:"35P·0C·3F·187cal"},
+           {name:"White rice, ½ cup cooked",macro:"2P·22C·0F·103cal"},
+           {name:"Banana, ½ medium (fresh)",macro:"0P·13C·0F·52cal"},
+           {name:"↳ Best pre-workout option · dual-speed carb · banana always grab fresh",macro:""},
          ]},
       ]},
-      // MEAL 4 — 6pm — POST-WORKOUT: Fast-digesting carbs + complete protein
-      // Science: Elevated insulin sensitivity post-exercise drives glucose into muscle preferentially
-      // High-GI carbs + whey-class protein maximizes glycogen replenishment and MPS
+      // ── MEAL 4 · 6:00 PM · POST-WORKOUT MEAL PREP + FRESH BANANA ──
+      // Largest meal. Fast carbs replenish glycogen in the 0–2hr post-workout window.
+      // Banana is always added fresh — never prepped. Rice + banana = dual-speed insulin spike.
       {time:"6:00 PM",label:"post",options:[
-        {name:"Turkey + Rice + Banana",cal:470,protein:40,carbs:58,fat:7,
-         items:[
-           {name:"93/7 Ground turkey, 5 oz cooked",macro:"35P·0C·7F·218cal"},
-           {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
-           {name:"Banana, 1 small",macro:"1P·23C·0F·90cal"},
-           {name:"↳ Banana GI ~51 + white rice GI ~73: dual-speed carb for glycogen reload",macro:""},
-         ]},
-        {name:"Chicken + Rice + Banana",cal:455,protein:46,carbs:57,fat:4,
+        {name:"Chicken + Rice + Banana",cal:492,protein:48,carbs:61,fat:4,fridgeDays:4,
          items:[
            {name:"Chicken breast, 5 oz cooked",macro:"44P·0C·4F·232cal"},
            {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
-           {name:"Banana, 1 small",macro:"1P·23C·0F·90cal"},
-           {name:"↳ Leaner than turkey — lower fat means faster insulin response post-workout",macro:""},
+           {name:"Banana, 1 medium (always fresh)",macro:"1P·27C·0F·105cal"},
+           {name:"↳ Gold standard post-workout · chicken: 4.5g leucine ✓ · banana always grab fresh",macro:""},
          ]},
-        {name:"Shrimp + Rice + Banana",cal:400,protein:37,carbs:57,fat:2,
+        {name:"Ground Turkey + Rice + Banana",cal:478,protein:39,carbs:61,fat:7,fridgeDays:4,
          items:[
-           {name:"Shrimp, 5 oz cooked",macro:"29P·0C·2F·140cal"},
+           {name:"93/7 Ground turkey, 5 oz cooked",macro:"35P·0C·7F·218cal"},
            {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
-           {name:"Banana, 1 medium",macro:"1P·27C·0F·105cal"},
-           {name:"↳ Lowest fat option post-workout · Potassium restores electrolytes",macro:""},
+           {name:"Banana, 1 medium (always fresh)",macro:"1P·27C·0F·105cal"},
+           {name:"↳ Higher fat than chicken — still effective · good for variety nights",macro:""},
          ]},
-        {name:"Pea Milk Shake Bowl",cal:432,protein:46,carbs:50,fat:7,
+        {name:"Chicken + Sweet Potato + Banana",cal:407,protein:46,carbs:43,fat:4,fridgeDays:4,
          items:[
-           {name:"Chocolate pea milk, 1 cup",macro:"8P·16C·4F·130cal"},
-           {name:"Whey protein, 1 scoop",macro:"25P·3C·2F·120cal"},
-           {name:"1% Cottage cheese, ½ cup",macro:"14P·3C·1F·80cal"},
+           {name:"Chicken breast, 5 oz cooked",macro:"44P·0C·4F·232cal"},
+           {name:"Sweet potato, 1 small",macro:"1P·16C·0F·70cal"},
+           {name:"Banana, 1 medium (always fresh)",macro:"1P·27C·0F·105cal"},
+           {name:"↳ Lower total carbs · good if today was a rest day or low-volume session",macro:""},
+         ]},
+        {name:"Turkey + Rice + Sweet Potato",cal:451,protein:38,carbs:60,fat:7,fridgeDays:4,
+         items:[
+           {name:"93/7 Ground turkey, 5 oz cooked",macro:"35P·0C·7F·218cal"},
            {name:"White rice, ½ cup cooked",macro:"2P·22C·0F·103cal"},
-           {name:"Banana, 1 medium",macro:"1P·27C·0F·105cal"},
-           {name:"↳ Mix pea milk + whey as shake · ½ cup rice keeps carbs on target · Full macros matched for Phase 1",macro:""},
+           {name:"Sweet potato, 1 small",macro:"1P·16C·0F·70cal"},
+           {name:"Banana, 1 medium (always fresh)",macro:"1P·27C·0F·105cal"},
+           {name:"↳ Triple carb source post-workout · no banana needed if sweet potato covers it",macro:""},
          ]},
       ]},
     ],
@@ -745,111 +828,113 @@ const PHASES = {
     training:"4× / week · Upper / Lower",rpe:"RPE 7–8",
     desc:"Calorie ramp ~100/week to ~1,750. Add a 4th training day. Progressive overload begins in earnest.",
     meals:[
+      // ── MEAL 1 · 5:00 AM · BREAKFAST — larger portions for Phase 2 ─
       {time:"5:00 AM",label:null,options:[
-        {name:"Protein Oats — Full",cal:527,protein:46,carbs:73,fat:7,
+        {name:"Full Protein Oat Bowl",cal:402,protein:31,carbs:53,fat:7,fridgeDays:null,
          items:[
-           {name:"Rolled oats, ½ cup dry",macro:"10P·54C·5F·300cal"},
+           {name:"Rolled oats, ½ cup dry",macro:"5P·36C·3F·200cal"},
            {name:"Whey protein, 1 scoop",macro:"25P·3C·2F·120cal"},
-           {name:"Non-fat Greek yogurt, ½ cup",macro:"11P·5C·0F·65cal"},
-           {name:"Blueberries, ½ cup",macro:"0P·11C·0F·42cal"},
-           {name:"↳ Greek yogurt adds casein — dual-source protein extends MPS window",macro:""},
+           {name:"Banana, ½ medium sliced in",macro:"0P·13C·0F·52cal"},
+           {name:"Fit butter, 1 tsp",macro:"1P·1C·2F·30cal"},
+           {name:"↳ Bigger oat portion matches Phase 2 calorie step-up",macro:""},
          ]},
-        {name:"Bagel + Egg Whites + Shake",cal:630,protein:58,carbs:63,fat:12,
-         items:[
-           {name:"Sprouts NY Bagel",macro:"~11P·~60C·~2F·310cal"},
-           {name:"Nancy's Probiotic Cream Cheese, 2 tbsp",macro:"~2P·1C·~10F·110cal"},
-           {name:"Liquid egg whites, ¾ cup",macro:"20P·1C·0F·90cal"},
-           {name:"Whey protein shake (side)",macro:"25P·3C·2F·120cal"},
-           {name:"↳ Higher cal fits Phase 2 budget · Probiotics in cream cheese support gut health",macro:""},
-         ]},
-        {name:"Egg Whites + Oats + Cottage Cheese",cal:490,protein:52,carbs:44,fat:5,
+        {name:"Egg White + Whey Power Bowl",cal:492,protein:58,carbs:53,fat:5,fridgeDays:null,
          items:[
            {name:"Liquid egg whites, 1 cup",macro:"26P·1C·0F·120cal"},
-           {name:"Rolled oats, ½ cup dry",macro:"10P·54C·5F·300cal"},
-           {name:"1% Cottage cheese, ½ cup",macro:"14P·3C·1F·77cal"},
-           {name:"↳ Whey (eggs) + casein (cottage cheese) = complete dual-protein source",macro:""},
+           {name:"Whey protein, 1 scoop",macro:"25P·3C·2F·120cal"},
+           {name:"Rolled oats, ⅓ cup dry",macro:"7P·36C·3F·200cal"},
+           {name:"Banana, ½ medium",macro:"0P·13C·0F·52cal"},
+           {name:"↳ Highest protein Phase 2 breakfast · 58g protein from first meal ✓",macro:""},
+         ]},
+        {name:"Whey Banana Oat Shake",cal:485,protein:45,carbs:67,fat:6,fridgeDays:null,
+         items:[
+           {name:"Whey protein, 1.5 scoops",macro:"37P·4C·3F·180cal"},
+           {name:"Banana, 1 medium",macro:"1P·27C·0F·105cal"},
+           {name:"Rolled oats, ⅓ cup dry (blend in)",macro:"7P·36C·3F·200cal"},
+           {name:"↳ Highest carb breakfast · best on training mornings · blend with ice",macro:""},
+         ]},
+        {name:"Fit Butter Egg Power Shake",cal:465,protein:62,carbs:35,fat:11,fridgeDays:null,
+         items:[
+           {name:"Whey protein, 1.5 scoops",macro:"37P·4C·3F·180cal"},
+           {name:"Liquid egg whites, ¾ cup",macro:"20P·1C·0F·90cal"},
+           {name:"Banana, 1 medium",macro:"1P·27C·0F·105cal"},
+           {name:"Fit butter, 1 tbsp",macro:"4P·3C·8F·90cal"},
+           {name:"↳ Keeps hunger suppressed through 9am meal · blend everything with ice",macro:""},
          ]},
       ]},
+      // ── MEAL 2 · 9:00 AM · MEAL PREP CONTAINER — bigger portions ──
       {time:"9:00 AM",label:null,options:[
-        {name:"Chicken Rice Bowl",cal:418,protein:50,carbs:40,fat:4,
+        {name:"Chicken + Rice (5 oz)",cal:387,protein:47,carbs:34,fat:4,fridgeDays:4,
          items:[
            {name:"Chicken breast, 5 oz cooked",macro:"44P·0C·4F·232cal"},
            {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
-           {name:"Broccoli, 1 cup",macro:"3P·6C·0F·31cal"},
-           {name:"↳ Chicken: highest leucine per calorie of all meats · Fat <5g ✓",macro:""},
+           {name:"↳ MEAL PREP · portion increased for Phase 2 · max 4 days refrigerated",macro:""},
          ]},
-        {name:"Tuna + Sweet Potato",cal:370,protein:42,carbs:34,fat:1,
-         items:[
-           {name:"Canned tuna in water, 5 oz",macro:"36P·0C·1F·150cal"},
-           {name:"Sweet potato, 1 medium",macro:"2P·26C·0F·112cal"},
-           {name:"Broccoli, 1 cup",macro:"3P·6C·0F·31cal"},
-           {name:"Salsa, 3 tbsp",macro:"0P·4C·0F·20cal"},
-           {name:"↳ Near-zero fat keeps digestion clear for 1pm pre-workout window",macro:""},
-         ]},
-        {name:"Ground Turkey + Rice",cal:430,protein:48,carbs:38,fat:8,
+        {name:"Ground Turkey + Rice (5 oz)",cal:373,protein:38,carbs:34,fat:7,fridgeDays:4,
          items:[
            {name:"93/7 Ground turkey, 5 oz cooked",macro:"35P·0C·7F·218cal"},
            {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
-           {name:"Spinach, 1 cup",macro:"1P·1C·0F·7cal"},
-           {name:"Low-sodium soy sauce, 1 tbsp",macro:"1P·1C·0F·10cal"},
-           {name:"↳ Turkey: 3.6g leucine ✓ · Fat slightly higher — eat 9am not after 10am",macro:""},
+           {name:"↳ MEAL PREP · max 4 days refrigerated · season with garlic + black pepper",macro:""},
          ]},
-      ]},
-      {time:"1:00 PM",label:"pre",options:[
-        {name:"Tuna + Rice + Sweet Potato",cal:330,protein:40,carbs:39,fat:1,
+        {name:"Chicken + Sweet Potato (5 oz)",cal:344,protein:46,carbs:26,fat:4,fridgeDays:4,
          items:[
-           {name:"Canned tuna in water, 5 oz",macro:"36P·0C·1F·150cal"},
+           {name:"Chicken breast, 5 oz cooked",macro:"44P·0C·4F·232cal"},
+           {name:"Sweet potato, 1 medium",macro:"2P·26C·0F·112cal"},
+           {name:"↳ MEAL PREP · medium sweet potato fits Phase 2 carb increase",macro:""},
+         ]},
+        {name:"Turkey + Rice + Sweet Potato",cal:348,protein:31,carbs:38,fat:6,fridgeDays:4,
+         items:[
+           {name:"93/7 Ground turkey, 4 oz cooked",macro:"28P·0C·6F·175cal"},
            {name:"White rice, ½ cup cooked",macro:"2P·22C·0F·103cal"},
            {name:"Sweet potato, 1 small",macro:"1P·16C·0F·70cal"},
-           {name:"↳ <1g fat total · Carbs from two sources hit bloodstream at different rates",macro:""},
+           {name:"↳ MEAL PREP · dual carb source · good variety from standard rice-only containers",macro:""},
          ]},
-        {name:"Chicken + White Rice",cal:342,protein:44,carbs:34,fat:4,
+      ]},
+      // ── MEAL 3 · 1:00 PM · PRE-WORKOUT MEAL PREP — Phase 2 ────────
+      {time:"1:00 PM",label:"pre",options:[
+        {name:"Chicken + White Rice (big)",cal:393,protein:39,carbs:45,fat:3,fridgeDays:4,
+         items:[
+           {name:"Chicken breast, 4 oz cooked",macro:"35P·0C·3F·187cal"},
+           {name:"White rice, 1 cup cooked",macro:"4P·45C·0F·206cal"},
+           {name:"↳ MEAL PREP · 1 full cup rice supports higher RPE 7–8 training · fat <3g ✓",macro:""},
+         ]},
+        {name:"Ground Turkey + White Rice (big)",cal:381,protein:32,carbs:45,fat:6,fridgeDays:4,
+         items:[
+           {name:"93/7 Ground turkey, 4 oz cooked",macro:"28P·0C·6F·175cal"},
+           {name:"White rice, 1 cup cooked",macro:"4P·45C·0F·206cal"},
+           {name:"↳ MEAL PREP · eat no later than 12:30 if training at 3:30 due to fat content",macro:""},
+         ]},
+        {name:"Chicken + Rice + Banana",cal:394,protein:38,carbs:47,fat:3,fridgeDays:4,
          items:[
            {name:"Chicken breast, 4 oz cooked",macro:"35P·0C·3F·187cal"},
            {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
-           {name:"Broccoli, ½ cup",macro:"1P·3C·0F·16cal"},
-           {name:"↳ Proven pre-workout combo — zero fiber interference with digestion",macro:""},
-         ]},
-        {name:"Shrimp + White Rice",cal:320,protein:38,carbs:35,fat:2,
-         items:[
-           {name:"Shrimp, 5 oz cooked",macro:"29P·0C·2F·140cal"},
-           {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
-           {name:"Hot sauce to taste",macro:"0P·1C·0F·5cal"},
-           {name:"↳ Lowest fat pre-workout option · Carbs fully available by training time",macro:""},
+           {name:"Banana, ½ medium (fresh)",macro:"0P·13C·0F·52cal"},
+           {name:"↳ MEAL PREP chicken + rice · grab banana fresh · best for heavy lower body days",macro:""},
          ]},
       ]},
+      // ── MEAL 4 · 6:00 PM · POST-WORKOUT MEAL PREP — Phase 2 ───────
       {time:"6:00 PM",label:"post",options:[
-        {name:"Turkey + Rice + Banana",cal:509,protein:42,carbs:67,fat:7,
+        {name:"Chicken + Rice + Banana (big)",cal:589,protein:58,carbs:72,fat:5,fridgeDays:4,
          items:[
-           {name:"93/7 Ground turkey, 5 oz cooked",macro:"35P·0C·7F·218cal"},
-           {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
-           {name:"Banana, 1 medium",macro:"1P·27C·0F·105cal"},
-           {name:"Broccoli, 1 cup",macro:"3P·6C·0F·31cal"},
-           {name:"↳ Post-workout insulin spike from white rice + banana replenishes glycogen fast",macro:""},
+           {name:"Chicken breast, 6 oz cooked",macro:"53P·0C·5F·278cal"},
+           {name:"White rice, 1 cup cooked",macro:"4P·45C·0F·206cal"},
+           {name:"Banana, 1 medium (always fresh)",macro:"1P·27C·0F·105cal"},
+           {name:"↳ Phase 2 post-workout · 6oz chicken is your biggest leucine hit yet",macro:""},
          ]},
-        {name:"Chicken + Rice + Banana",cal:495,protein:50,carbs:62,fat:4,
+        {name:"Ground Turkey + Rice + Banana (big)",cal:573,protein:47,carbs:72,fat:8,fridgeDays:4,
+         items:[
+           {name:"93/7 Ground turkey, 6 oz cooked",macro:"42P·0C·8F·262cal"},
+           {name:"White rice, 1 cup cooked",macro:"4P·45C·0F·206cal"},
+           {name:"Banana, 1 medium (always fresh)",macro:"1P·27C·0F·105cal"},
+           {name:"↳ Higher fat — fine post-workout · insulin sensitivity window still active",macro:""},
+         ]},
+        {name:"Chicken + Rice + Sweet Pot + Banana",cal:510,protein:48,carbs:70,fat:4,fridgeDays:4,
          items:[
            {name:"Chicken breast, 5 oz cooked",macro:"44P·0C·4F·232cal"},
-           {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
-           {name:"Banana, 1 medium",macro:"1P·27C·0F·105cal"},
-           {name:"↳ Higher protein option · Chicken + white rice is the gold-standard recomp meal",macro:""},
-         ]},
-        {name:"Cod + Rice + Banana",cal:460,protein:44,carbs:64,fat:2,
-         items:[
-           {name:"Cod or tilapia, 6 oz cooked",macro:"36P·0C·2F·180cal"},
-           {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
-           {name:"Banana, 1 medium",macro:"1P·27C·0F·105cal"},
-           {name:"Spinach sautéed, 1 cup",macro:"1P·1C·0F·7cal"},
-           {name:"↳ Lowest fat post-workout option — fastest insulin response window",macro:""},
-         ]},
-        {name:"Pea Milk Shake Bowl",cal:510,protein:50,carbs:61,fat:7,
-         items:[
-           {name:"Chocolate pea milk, 1 cup",macro:"8P·16C·4F·130cal"},
-           {name:"Whey protein, 1 scoop",macro:"25P·3C·2F·120cal"},
-           {name:"1% Cottage cheese, ½ cup",macro:"14P·3C·1F·80cal"},
            {name:"White rice, ½ cup cooked",macro:"2P·22C·0F·103cal"},
-           {name:"Banana, 1 medium",macro:"1P·27C·0F·105cal"},
-           {name:"↳ Mix pea milk + whey as shake · Rice reduced to ½ cup to stay on Phase 2 carb target",macro:""},
+           {name:"Sweet potato, 1 small",macro:"1P·16C·0F·70cal"},
+           {name:"Banana, 1 medium (always fresh)",macro:"1P·27C·0F·105cal"},
+           {name:"↳ Triple carb source · best on high-volume leg days",macro:""},
          ]},
       ]},
     ],
@@ -870,114 +955,123 @@ const PHASES = {
     training:"4–5× / week · RPE 8–9",rpe:"RPE 8–9",
     desc:"Full recomposition calories. Building muscle while burning fat simultaneously. Push close to failure on isolations.",
     meals:[
+      // ── MEAL 1 · 5:00 AM · BREAKFAST — Phase 3 full portions ──────
       {time:"5:00 AM",label:null,options:[
-        {name:"Protein Oats — Full",cal:527,protein:46,carbs:73,fat:7,
+        {name:"Protein Oat Bowl (Phase 3)",cal:530,protein:45,carbs:68,fat:10,fridgeDays:null,
          items:[
-           {name:"Rolled oats, ½ cup dry",macro:"10P·54C·5F·300cal"},
-           {name:"Whey protein, 1 scoop",macro:"25P·3C·2F·120cal"},
-           {name:"Non-fat Greek yogurt, ½ cup",macro:"11P·5C·0F·65cal"},
-           {name:"Blueberries, ½ cup",macro:"0P·11C·0F·42cal"},
-           {name:"↳ Blueberries: anthocyanins reduce post-exercise oxidative stress",macro:""},
+           {name:"Rolled oats, ½ cup dry",macro:"5P·36C·3F·200cal"},
+           {name:"Whey protein, 1.5 scoops",macro:"37P·4C·3F·180cal"},
+           {name:"Banana, ½ medium sliced in",macro:"0P·13C·0F·52cal"},
+           {name:"Fit butter, ½ tbsp",macro:"2P·2C·4F·48cal"},
+           {name:"↳ Full Phase 3 breakfast · biggest carb start of the program · prep oats night before",macro:""},
          ]},
-        {name:"Bagel + Egg Whites + Shake",cal:630,protein:58,carbs:63,fat:12,
+        {name:"Egg White + Whey Oat Bowl",cal:492,protein:58,carbs:53,fat:5,fridgeDays:null,
          items:[
-           {name:"Sprouts NY Bagel",macro:"~11P·~60C·~2F·310cal"},
-           {name:"Nancy's Probiotic Cream Cheese, 2 tbsp",macro:"~2P·1C·~10F·110cal"},
-           {name:"Liquid egg whites, ¾ cup",macro:"20P·1C·0F·90cal"},
-           {name:"Whey protein shake (side)",macro:"25P·3C·2F·120cal"},
-           {name:"↳ Phase 3 calories support this higher-carb breakfast without issue",macro:""},
-         ]},
-        {name:"Protein Oats + Cottage Cheese",cal:555,protein:58,carbs:58,fat:7,
-         items:[
-           {name:"Rolled oats, ½ cup dry",macro:"10P·54C·5F·300cal"},
+           {name:"Liquid egg whites, 1 cup",macro:"26P·1C·0F·120cal"},
            {name:"Whey protein, 1 scoop",macro:"25P·3C·2F·120cal"},
-           {name:"1% Cottage cheese, ½ cup",macro:"14P·3C·1F·77cal"},
-           {name:"Blueberries, ¼ cup",macro:"0P·5C·0F·21cal"},
-           {name:"↳ Whey triggers immediate MPS · Casein in cottage cheese sustains it 4-5hrs",macro:""},
+           {name:"Rolled oats, ⅓ cup dry",macro:"7P·36C·3F·200cal"},
+           {name:"Banana, 1 medium",macro:"1P·27C·0F·105cal"},
+           {name:"↳ Banana increased to full medium here for Phase 3 carbs",macro:""},
+         ]},
+        {name:"Banana Fit Butter Shake",cal:528,protein:45,carbs:62,fat:10,fridgeDays:null,
+         items:[
+           {name:"Whey protein, 1.5 scoops",macro:"37P·4C·3F·180cal"},
+           {name:"Banana, 1.5 medium",macro:"1P·40C·0F·157cal"},
+           {name:"Fit butter, 1 tbsp",macro:"4P·3C·8F·90cal"},
+           {name:"Rolled oats, ¼ cup dry (blend in)",macro:"3P·18C·2F·100cal"},
+           {name:"↳ Blend with ice · highest calorie shake · banana drives insulin for morning MPS",macro:""},
+         ]},
+        {name:"High Protein Egg + Oat Bowl",cal:545,protein:59,carbs:64,fat:5,fridgeDays:null,
+         items:[
+           {name:"Liquid egg whites, 1 cup",macro:"26P·1C·0F·120cal"},
+           {name:"Whey protein, 1 scoop",macro:"25P·3C·2F·120cal"},
+           {name:"Rolled oats, ⅓ cup dry",macro:"7P·36C·3F·200cal"},
+           {name:"Banana, 1 medium",macro:"1P·27C·0F·105cal"},
+           {name:"↳ Maximum protein + carb breakfast · best before heavy compound sessions",macro:""},
          ]},
       ]},
+      // ── MEAL 2 · 9:00 AM · MEAL PREP CONTAINER — Phase 3 ──────────
       {time:"9:00 AM",label:null,options:[
-        {name:"Chicken Rice Bowl",cal:492,protein:51,carbs:42,fat:11,
+        {name:"Chicken + Rice + Sweet Potato",cal:405,protein:47,carbs:38,fat:4,fridgeDays:4,
          items:[
            {name:"Chicken breast, 5 oz cooked",macro:"44P·0C·4F·232cal"},
-           {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
-           {name:"Broccoli, 1.5 cups",macro:"4P·8C·0F·45cal"},
-           {name:"Olive oil, ½ tbsp",macro:"0P·0C·7F·60cal"},
-           {name:"↳ Olive oil: oleic acid supports testosterone synthesis (Hamalainen et al.)",macro:""},
+           {name:"White rice, ½ cup cooked",macro:"2P·22C·0F·103cal"},
+           {name:"Sweet potato, 1 small",macro:"1P·16C·0F·70cal"},
+           {name:"↳ MEAL PREP · dual carb source now at Phase 3 · max 4 days refrigerated",macro:""},
          ]},
-        {name:"Tuna + Rice + Avocado",cal:470,protein:43,carbs:36,fat:13,
+        {name:"Ground Turkey + Rice (1 cup)",cal:424,protein:39,carbs:45,fat:7,fridgeDays:4,
          items:[
-           {name:"Canned tuna in water, 5 oz",macro:"36P·0C·1F·150cal"},
-           {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
-           {name:"Avocado, ¼",macro:"1P·4C·6F·60cal"},
-           {name:"Spinach, 1 cup",macro:"1P·1C·0F·7cal"},
-           {name:"↳ MUFAs from avocado support hormone production · Keep to ¼ avocado only",macro:""},
+           {name:"93/7 Ground turkey, 5 oz cooked",macro:"35P·0C·7F·218cal"},
+           {name:"White rice, 1 cup cooked",macro:"4P·45C·0F·206cal"},
+           {name:"↳ MEAL PREP · full cup rice fits Phase 3 carb target · max 4 days refrigerated",macro:""},
          ]},
-        {name:"Ground Turkey + Sweet Potato",cal:488,protein:50,carbs:46,fat:8,
+        {name:"Chicken + Rice (6 oz)",cal:438,protein:53,carbs:45,fat:4,fridgeDays:4,
+         items:[
+           {name:"Chicken breast, 6 oz cooked",macro:"53P·0C·5F·278cal"},
+           {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
+           {name:"↳ MEAL PREP · biggest protein hit at 9am · 53g protein",macro:""},
+         ]},
+        {name:"Turkey + Sweet Potato + Rice",cal:433,protein:38,carbs:67,fat:7,fridgeDays:4,
          items:[
            {name:"93/7 Ground turkey, 5 oz cooked",macro:"35P·0C·7F·218cal"},
            {name:"Sweet potato, 1 medium",macro:"2P·26C·0F·112cal"},
-           {name:"Broccoli, 1 cup",macro:"3P·6C·0F·31cal"},
-           {name:"Olive oil, ¼ tbsp",macro:"0P·0C·3F·35cal"},
-           {name:"↳ Turkey zinc + sweet potato beta-carotene: both support immune function",macro:""},
+           {name:"White rice, ½ cup cooked",macro:"2P·22C·0F·103cal"},
+           {name:"↳ MEAL PREP · highest carb mid-morning container · good on big training days",macro:""},
          ]},
       ]},
+      // ── MEAL 3 · 1:00 PM · PRE-WORKOUT MEAL PREP — Phase 3 ────────
       {time:"1:00 PM",label:"pre",options:[
-        {name:"Tuna + Rice + Sweet Potato",cal:433,protein:42,carbs:62,fat:1,
-         items:[
-           {name:"Canned tuna in water, 5 oz",macro:"36P·0C·1F·150cal"},
-           {name:"White rice, 1 cup cooked",macro:"4P·45C·0F·206cal"},
-           {name:"Sweet potato, 1 small",macro:"1P·16C·0F·70cal"},
-           {name:"↳ Research-backed pre-workout meal · <1g fat · Carbs peak 2hr post-ingestion",macro:""},
-         ]},
-        {name:"Chicken + Rice + Banana",cal:450,protein:46,carbs:55,fat:4,
+        {name:"Chicken + Rice + Banana",cal:439,protein:48,carbs:47,fat:4,fridgeDays:4,
          items:[
            {name:"Chicken breast, 5 oz cooked",macro:"44P·0C·4F·232cal"},
            {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
-           {name:"Banana, 1 small",macro:"1P·23C·0F·90cal"},
-           {name:"↳ Banana potassium + magnesium reduce muscle cramping during training",macro:""},
+           {name:"Banana, ½ medium (fresh)",macro:"0P·13C·0F·52cal"},
+           {name:"↳ Best Phase 3 pre-workout · pull chicken + rice from fridge · grab banana fresh",macro:""},
          ]},
-        {name:"Shrimp + Rice",cal:400,protein:38,carbs:45,fat:2,
+        {name:"Turkey + Rice + Banana",cal:476,protein:39,carbs:72,fat:7,fridgeDays:4,
          items:[
-           {name:"Shrimp, 6 oz cooked",macro:"35P·0C·2F·168cal"},
+           {name:"93/7 Ground turkey, 5 oz cooked",macro:"35P·0C·7F·218cal"},
            {name:"White rice, 1 cup cooked",macro:"4P·45C·0F·206cal"},
-           {name:"Hot sauce to taste",macro:"0P·1C·0F·5cal"},
-           {name:"↳ Highest carb-to-fat ratio pre-workout option — fastest fuel delivery",macro:""},
+           {name:"Banana, ½ medium (fresh)",macro:"0P·13C·0F·52cal"},
+           {name:"↳ MEAL PREP · highest pre-workout carbs · best before near-failure lower sessions",macro:""},
+         ]},
+        {name:"Chicken + Rice (big, no banana)",cal:438,protein:53,carbs:45,fat:4,fridgeDays:4,
+         items:[
+           {name:"Chicken breast, 6 oz cooked",macro:"53P·0C·5F·278cal"},
+           {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
+           {name:"↳ MEAL PREP · max protein pre-workout · keeps fat very low ✓",macro:""},
          ]},
       ]},
+      // ── MEAL 4 · 6:00 PM · POST-WORKOUT MEAL PREP — Phase 3 ───────
       {time:"6:00 PM",label:"post",options:[
-        {name:"Turkey + Rice + Banana",cal:602,protein:50,carbs:78,fat:9,
+        {name:"Chicken + Rice + Banana (max)",cal:589,protein:58,carbs:72,fat:5,fridgeDays:4,
          items:[
-           {name:"93/7 Ground turkey, 6 oz cooked",macro:"42P·0C·9F·260cal"},
+           {name:"Chicken breast, 6 oz cooked",macro:"53P·0C·5F·278cal"},
            {name:"White rice, 1 cup cooked",macro:"4P·45C·0F·206cal"},
-           {name:"Banana, 1 medium",macro:"1P·27C·0F·105cal"},
-           {name:"Broccoli, 1 cup",macro:"3P·6C·0F·31cal"},
-           {name:"↳ GI ~70+ combined · Post-exercise insulin sensitivity window: 0-2 hours",macro:""},
+           {name:"Banana, 1 medium (always fresh)",macro:"1P·27C·0F·105cal"},
+           {name:"↳ Peak recomp post-workout · 58g protein + dual carb reload · always grab banana fresh",macro:""},
          ]},
-        {name:"Chicken + Rice + Banana",cal:590,protein:52,carbs:72,fat:4,
+        {name:"Ground Turkey + Rice + Banana (max)",cal:573,protein:47,carbs:72,fat:8,fridgeDays:4,
          items:[
-           {name:"Chicken breast, 6 oz cooked",macro:"53P·0C·5F·280cal"},
+           {name:"93/7 Ground turkey, 6 oz cooked",macro:"42P·0C·8F·262cal"},
            {name:"White rice, 1 cup cooked",macro:"4P·45C·0F·206cal"},
-           {name:"Banana, 1 medium",macro:"1P·27C·0F·105cal"},
-           {name:"↳ 53g protein from chicken exceeds leucine threshold decisively (4.5g+)",macro:""},
+           {name:"Banana, 1 medium (always fresh)",macro:"1P·27C·0F·105cal"},
+           {name:"↳ Good variety from chicken · fat post-workout doesn't impair glycogen uptake",macro:""},
          ]},
-        {name:"Cod + Rice + Banana",cal:565,protein:48,carbs:76,fat:2,
+        {name:"Chicken + Sweet Potato + Banana",cal:495,protein:56,carbs:53,fat:5,fridgeDays:4,
          items:[
-           {name:"Cod or tilapia, 7 oz cooked",macro:"42P·0C·2F·210cal"},
-           {name:"White rice, 1 cup cooked",macro:"4P·45C·0F·206cal"},
-           {name:"Banana, 1 medium",macro:"1P·27C·0F·105cal"},
-           {name:"Spinach sautéed, 1 cup",macro:"1P·1C·0F·7cal"},
-           {name:"↳ Lowest fat post-workout option — maximizes insulin spike for glycogen storage",macro:""},
+           {name:"Chicken breast, 6 oz cooked",macro:"53P·0C·5F·278cal"},
+           {name:"Sweet potato, 1 medium",macro:"2P·26C·0F·112cal"},
+           {name:"Banana, 1 medium (always fresh)",macro:"1P·27C·0F·105cal"},
+           {name:"↳ Lower total carbs · good on lower-intensity or shorter sessions",macro:""},
          ]},
-        {name:"Pea Milk Shake Bowl",cal:645,protein:50,carbs:93,fat:7,
+        {name:"Turkey + Rice + Sweet Potato + Banana",cal:548,protein:40,carbs:88,fat:7,fridgeDays:4,
          items:[
-           {name:"Chocolate pea milk, 1 cup",macro:"8P·16C·4F·130cal"},
-           {name:"Whey protein, 1 scoop",macro:"25P·3C·2F·120cal"},
-           {name:"1% Cottage cheese, ½ cup",macro:"14P·3C·1F·80cal"},
-           {name:"White rice, 1 cup cooked",macro:"4P·45C·0F·206cal"},
-           {name:"Banana, 1 medium",macro:"1P·27C·0F·105cal"},
-           {name:"Blueberries, ½ cup",macro:"0P·11C·0F·42cal"},
-           {name:"↳ Mix pea milk + whey as shake · Cottage cheese closes protein gap · All macros on target",macro:""},
+           {name:"93/7 Ground turkey, 5 oz cooked",macro:"35P·0C·7F·218cal"},
+           {name:"White rice, ¾ cup cooked",macro:"3P·34C·0F·155cal"},
+           {name:"Sweet potato, 1 small",macro:"1P·16C·0F·70cal"},
+           {name:"Banana, 1 medium (always fresh)",macro:"1P·27C·0F·105cal"},
+           {name:"↳ Highest carb post-workout option · best after longest hardest session of the week",macro:""},
          ]},
       ]},
     ],
@@ -1015,7 +1109,120 @@ const Store={
 };
 
 // ═══════════════════════════════════════════════════════════
-// INGREDIENT AVAILABILITY — maps grocery keys to meal keywords
+// MEAL PREP GUIDE — Batch cooking instructions
+// FDA food safety guidelines for cooked proteins
+// ═══════════════════════════════════════════════════════════
+const MEAL_PREP_GUIDE = {
+  schedule: {
+    batch1: { label:'BATCH 1', day:'Sunday', covers:'Mon – Thur (4 days)' },
+    batch2: { label:'BATCH 2', day:'Thursday', covers:'Fri – Sun (3 days)' },
+    note: 'Split into 2 batches per week. Chicken & turkey are only safe 4 days refrigerated.',
+  },
+  weekly_quantities: [
+    { item:'Chicken Breast (raw)', amount:'3.5 lbs', yields:'~2.75 lbs cooked · ~11 containers at 4–5 oz' },
+    { item:'Ground Turkey 93/7 (raw)', amount:'2 lbs', yields:'~1.5 lbs cooked · ~6 containers at 4–5 oz' },
+    { item:'White Rice (dry)', amount:'4 cups dry', yields:'~10 cups cooked · covers all 17 containers' },
+    { item:'Sweet Potatoes', amount:'5 medium', yields:'~5 servings · mix in with some rice containers' },
+    { item:'Bananas', amount:'7–10', yields:'Always fresh — never prepped · one per post-workout meal' },
+  ],
+  proteins: [
+    {
+      name:'CHICKEN BREAST',
+      method:'Oven — easiest for large batches',
+      steps:[
+        'Preheat oven to 425°F',
+        'Pat chicken dry · season with salt, pepper, garlic powder',
+        'Place on lined baking sheet · don\'t overlap',
+        'Bake 22–26 min until internal temp reads 165°F',
+        'Rest 5 min before slicing into portions',
+        'Cool completely UNCOVERED before refrigerating',
+        'Portion into containers (4–6 oz each) · refrigerate immediately',
+      ],
+      fridgeDays: 4,
+      freezeMonths: 4,
+      tip:'Slice into portions before refrigerating — reheats more evenly and faster.',
+    },
+    {
+      name:'GROUND TURKEY 93/7',
+      method:'Stovetop — 10 minutes',
+      steps:[
+        'Heat skillet over medium-high · no oil needed (turkey has enough fat)',
+        'Add turkey · break into crumbles with a spatula',
+        'Cook 8–10 min stirring regularly until NO pink remains',
+        'Season with garlic powder, salt, pepper — or low-sodium soy sauce',
+        'Drain any excess liquid · cool completely before portioning',
+        'Portion into containers (4–5 oz each) · refrigerate immediately',
+      ],
+      fridgeDays: 4,
+      freezeMonths: 4,
+      tip:'Cook turkey completely dry — excess moisture speeds spoilage. Always drain before storing.',
+    },
+  ],
+  carbs: [
+    {
+      name:'WHITE RICE',
+      method:'Pot or rice cooker',
+      steps:[
+        'Rinse rice under cold water until clear',
+        'Ratio: 1 cup dry rice : 1.5 cups water',
+        'Bring to boil · cover · reduce to low · cook 15–18 min',
+        'Remove from heat · rest covered 10 min · fluff with fork',
+        'CRITICAL: Spread on baking sheet to cool quickly — warm rice grows bacteria fast',
+        'Refrigerate only once fully cooled to room temp (under 1 hour)',
+      ],
+      fridgeDays: 6,
+      tip:'Cool rice FAST. Never refrigerate warm rice — it creates ideal bacterial conditions.',
+    },
+    {
+      name:'SWEET POTATOES',
+      method:'Microwave — 6 min each',
+      steps:[
+        'Scrub and pierce with fork 6–8 times all over',
+        'Microwave on high 5–7 min (flip halfway)',
+        'Test with fork — should slide in easily',
+        'Cool completely before storing whole in fridge',
+        'OR slice and portion into containers with other meal prep',
+      ],
+      fridgeDays: 5,
+      tip:'Microwave individually. Batch oven roasting (400°F, 45 min) works for 4+ at once.',
+    },
+  ],
+  container_assembly: [
+    'Label every container with the protein, carb, and DATE prepped',
+    'Protein on one side, carb on the other — prevents sogginess',
+    'Reheat: microwave 90 sec, stir, 30 more sec if needed',
+    'Add banana ALWAYS fresh — never in containers',
+    'Breakfast items (oats, egg whites, whey) are never prepped — always made fresh',
+  ],
+};
+
+/** Get fridge age in days for a prep item. Returns null if not set. */
+function getFridgeDays(itemKey) {
+  const prepDate = Store.get('prepDate:'+itemKey, null);
+  if (!prepDate) return null;
+  const start = new Date(prepDate+'T00:00:00');
+  const now   = new Date();
+  return Math.floor((now - start) / (1000*60*60*24));
+}
+
+/** Returns freshness status: 'fresh' | 'ok' | 'warning' | 'expired' */
+function getFreshnessStatus(itemKey, maxDays) {
+  const days = getFridgeDays(itemKey);
+  if (days === null) return 'unknown';
+  if (days === 0) return 'fresh';
+  if (days <= maxDays - 2) return 'ok';
+  if (days <= maxDays - 1) return 'warning';
+  if (days <= maxDays) return 'last';
+  return 'expired';
+}
+
+/** Get the prep item key for a meal option */
+function getMealPrepKey(option) {
+  const name = (option.name || '').toLowerCase();
+  if (name.includes('chicken')) return 'chicken';
+  if (name.includes('turkey')) return 'turkey';
+  return null;
+}
 // Pantry staples (garlic, hot sauce, spices) are excluded —
 // assumed always available. Only shop items are checked.
 // ═══════════════════════════════════════════════════════════
@@ -1992,6 +2199,7 @@ const App={
     this.renderBody();
     this.renderGrocery();
     FoodSearch.init();
+    this.renderFridgeTracker();
   },
 
   updateHeader(){document.getElementById('topPhaseLabel').textContent='PHASE '+State.phase},
@@ -2162,6 +2370,8 @@ const App={
 
   // ── Meals ──────────────────────────────────────────────────
   renderMeals(){
+    // Always refresh fridge tracker when meals renders
+    this.renderFridgeTracker();
     const weekData = getCurrentWeekData();
     const mealAdj  = getCurrentMealAdjustments();
     const p = PHASES[weekData.phase];
@@ -2259,8 +2469,20 @@ const App={
         ? '<span class="label-tag pre">PRE-WORKOUT</span>'
         : '';
 
-      // Available badge on meal card header
-      const availBadge = anyChecked
+      // Fridge badge for prepped meals
+      const prepKey = opt.fridgeDays ? getMealPrepKey(opt) : null;
+      const fridgeStatus = prepKey ? getFreshnessStatus(prepKey, opt.fridgeDays) : null;
+      const fridgeBadgeMap = {
+        fresh:   {text:'FRESH TODAY', cls:'fresh'},
+        ok:      {text:`${getFridgeDays(prepKey)}D OLD`, cls:'ok'},
+        warning: {text:`${getFridgeDays(prepKey)}D ⚠`, cls:'warning'},
+        last:    {text:'EAT TODAY', cls:'last'},
+        expired: {text:'DISCARD', cls:'expired'},
+        unknown: {text:'LOG PREP DATE', cls:'unknown'},
+      };
+      const fridgeBadge = fridgeStatus
+        ? `<span class="fridge-badge fridge-badge--${fridgeBadgeMap[fridgeStatus]?.cls||'unknown'}">${fridgeBadgeMap[fridgeStatus]?.text||''}</span>`
+        : '';
         ? currentAvail
           ? `<span class="avail-badge avail-badge--ok">✓ READY</span>`
           : `<span class="avail-badge avail-badge--missing">✗ MISSING</span>`
@@ -2320,7 +2542,7 @@ const App={
             <div class="meal-card__time">${m.time}</div>
             <div class="meal-card__name" style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">
               ${opt.name}${adj?` <span style="font-size:11px;color:#1e3e14;font-family:'Space Mono',monospace">+adj</span>`:''}
-              ${availBadge}
+              ${availBadge}${fridgeBadge}
             </div>
             <div class="meal-card__cal">${totalMealCal} cal · ${totalMealP}g P${adj?` <span style="color:#1e3e14">(+${adj.addedCal} wk${weekNum})</span>`:''}</div>
           </div>
@@ -2542,7 +2764,83 @@ const App={
     document.getElementById('groceryHeader').innerHTML=`<div><div class="grocery-header__label">PHASE ${State.phase} · ${p.weeks}</div><div class="grocery-header__title">${checked}/${total} Items</div></div><button class="grocery-reset" onclick="App.resetGrocery()">RESET</button>`;
     document.getElementById('groceryBody').innerHTML=GROCERY.map(sec=>`<div><div class="grocery-section__title">${sec.section}</div><div class="grocery-items">${sec.items.map(item=>`<div class="grocery-item ${State.groceryChecks[item.key]?'checked':''}" onclick="App.toggleGrocery('${item.key}')"><div class="g-check"></div><div class="g-name">${item.name}</div><div class="g-qty">${item.qty}</div></div>`).join('')}</div></div>`).join('');
   },
-  toggleGrocery(key){
+  togglePrepGuide(){
+    const toggle = document.getElementById('prepGuideToggle');
+    const body   = document.getElementById('prepGuideBody');
+    const isOpen = toggle.classList.toggle('open');
+    body.classList.toggle('open', isOpen);
+    if (isOpen && !body.innerHTML.trim()) this.renderPrepGuide();
+  },
+
+  renderPrepGuide(){
+    const g = MEAL_PREP_GUIDE;
+    document.getElementById('prepGuideBody').innerHTML=`
+      <div class="prep-section-title">WEEKLY SCHEDULE</div>
+      <div class="prep-schedule">
+        <div class="prep-batch"><span class="prep-batch__label">${g.schedule.batch1.label}</span><div><div class="prep-batch__day">${g.schedule.batch1.day}</div><div class="prep-batch__covers">${g.schedule.batch1.covers}</div></div></div>
+        <div class="prep-batch"><span class="prep-batch__label">${g.schedule.batch2.label}</span><div><div class="prep-batch__day">${g.schedule.batch2.day}</div><div class="prep-batch__covers">${g.schedule.batch2.covers}</div></div></div>
+        <div class="prep-note">${g.schedule.note}</div>
+      </div>
+      <div class="prep-section-title">COOK THIS MUCH PER WEEK</div>
+      ${g.weekly_quantities.map(q=>`<div class="prep-qty-row"><span class="prep-qty-item">${q.item}</span><span class="prep-qty-val"><strong style="color:#c8a050">${q.amount}</strong> → ${q.yields}</span></div>`).join('')}
+      <div class="prep-section-title">HOW TO COOK PROTEINS</div>
+      ${g.proteins.map(p=>`<div class="prep-protein-card">
+        <div class="prep-protein-name">${p.name}</div>
+        <div class="prep-protein-method">${p.method.toUpperCase()}</div>
+        <div class="prep-steps">${p.steps.map((s,i)=>`<div class="prep-step"><span class="prep-step-num">${i+1}.</span><span>${s}</span></div>`).join('')}</div>
+        <div class="prep-fridge"><span class="prep-fridge-label">MAX FRIDGE</span><span class="prep-fridge-val">${p.fridgeDays} days · ${p.freezeMonths} months frozen</span></div>
+        <div class="prep-tip">💡 ${p.tip}</div>
+      </div>`).join('')}
+      <div class="prep-section-title">HOW TO COOK CARBS</div>
+      ${g.carbs.map(c=>`<div class="prep-carb-card">
+        <div class="prep-carb-name">${c.name}</div>
+        <div class="prep-protein-method" style="color:rgba(160,184,208,0.7)">${c.method.toUpperCase()}</div>
+        <div class="prep-steps">${c.steps.map((s,i)=>`<div class="prep-step"><span class="prep-step-num">${i+1}.</span><span>${s}</span></div>`).join('')}</div>
+        <div class="prep-fridge"><span class="prep-fridge-label">MAX FRIDGE</span><span class="prep-fridge-val" style="color:#a0b8d0">${c.fridgeDays} days</span></div>
+        <div class="prep-tip" style="border-left-color:rgba(26,48,80,0.5)">💡 ${c.tip}</div>
+      </div>`).join('')}
+      <div class="prep-section-title">CONTAINER ASSEMBLY</div>
+      ${g.container_assembly.map(s=>`<div class="prep-assembly-item"><span class="prep-assembly-dot">→</span><span>${s}</span></div>`).join('')}`;
+  },
+
+  renderFridgeTracker(){
+    const items = [
+      {key:'chicken', label:'CHICKEN', maxDays:4},
+      {key:'turkey',  label:'TURKEY',  maxDays:4},
+    ];
+    document.getElementById('fridgeTracker').innerHTML = items.map(({key,label,maxDays})=>{
+      const days   = getFridgeDays(key);
+      const status = getFreshnessStatus(key, maxDays);
+      const saved  = Store.get('prepDate:'+key, today());
+      const statusText = {
+        unknown:'Log prep date',
+        fresh:  'Cooked today',
+        ok:     `${days} day${days===1?'':'s'} old`,
+        warning:`${days} days old ⚠`,
+        last:   'EAT TODAY ✗',
+        expired:'DISCARD ✗',
+      }[status];
+      const badgeLabels = {unknown:'?', fresh:'FRESH', ok:'GOOD', warning:'SOON', last:'EAT TODAY', expired:'DISCARD'};
+      return`<div class="fridge-item">
+        <div class="fridge-item__name">${label}</div>
+        <div class="fridge-item__status ${status}">${statusText}</div>
+        <div style="font-family:'Space Mono',monospace;font-size:8px;color:#a08850">MAX ${maxDays} DAYS</div>
+        <div class="fridge-item__date">
+          <input type="date" class="fridge-date-input" id="fd_${key}" value="${saved}" max="${today()}" onchange="App.logPrepDate('${key}')">
+          <button class="fridge-log-btn" onclick="App.logPrepDate('${key}')">LOG</button>
+        </div>
+      </div>`;
+    }).join('');
+  },
+
+  logPrepDate(key){
+    const val = document.getElementById('fd_'+key)?.value;
+    if (!val) return;
+    Store.set('prepDate:'+key, val);
+    this.renderFridgeTracker();
+    this.renderMeals();
+    toast(`${key.charAt(0).toUpperCase()+key.slice(1)} prep date logged ✓`);
+  },
     State.groceryChecks[key]=!State.groceryChecks[key];
     Store.set('grocery',State.groceryChecks);
     this.renderGrocery();
