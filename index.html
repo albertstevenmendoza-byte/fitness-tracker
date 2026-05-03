@@ -2774,6 +2774,9 @@ const App={
       const fridgeBadge = fridgeStatus
         ? `<span class="fridge-badge fridge-badge--${fridgeBadgeMap[fridgeStatus]?.cls||'unknown'}">${fridgeBadgeMap[fridgeStatus]?.text||''}</span>`
         : '';
+
+      // Available badge on meal card header
+      const availBadge = anyChecked
         ? currentAvail
           ? `<span class="avail-badge avail-badge--ok">✓ READY</span>`
           : `<span class="avail-badge avail-badge--missing">✗ MISSING</span>`
@@ -3132,6 +3135,8 @@ const App={
     this.renderMeals();
     toast(`${key.charAt(0).toUpperCase()+key.slice(1)} prep date logged ✓`);
   },
+
+  toggleGrocery(key){
     State.groceryChecks[key]=!State.groceryChecks[key];
     Store.set('grocery',State.groceryChecks);
     this.renderGrocery();
