@@ -685,6 +685,132 @@ svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-lin
 .meal-opt-macro–p{color:#22aa55}.meal-opt-macro–c{color:#3388cc}.meal-opt-macro–f{color:#cc0000}.meal-opt-macro–cal{color:#888888}
 .text-muted{color:#888888;font-size:13px}
 @media(max-width:480px){.macro-bars{grid-template-columns:repeat(3,1fr)}}
+/* ═══════════════════════════════════════════════════════════
+VISIBILITY FIXES — must come last to override everything
+═══════════════════════════════════════════════════════════ */
+
+/* FIX 1: Stat numbers — remove chrome gradient (iOS Safari makes text invisible)
+-webkit-text-fill-color:transparent overrides color; nuke it */
+.stat-card__val{
+background:none!important;
+-webkit-background-clip:unset!important;
+background-clip:unset!important;
+-webkit-text-fill-color:unset!important;
+filter:none!important;
+color:#ffffff!important;
+}
+.stat-card–red .stat-card__val{color:#ff2200!important}
+.stat-card–green .stat-card__val{color:#22cc66!important}
+.stat-card–blue .stat-card__val{color:#44aaff!important}
+.stat-card–gold .stat-card__val{color:#ff2200!important}
+.stat-card__unit{color:#888888!important}
+
+/* FIX 2: Macro ring center number — same issue */
+.macro-ring__cal{
+background:none!important;
+-webkit-background-clip:unset!important;
+-webkit-text-fill-color:unset!important;
+color:#ffffff!important;
+}
+.macro-ring__label{color:#888888!important}
+
+/* FIX 3: Phase hero — solid visible background, not near-invisible gradient */
+.phase-hero{
+background:#1a0000!important;
+border:2px solid #cc0000!important;
+border-left:4px solid #ff2200!important;
+}
+.phase-hero__label{color:#ff2200!important;letter-spacing:3px}
+.phase-hero__name{color:#e8e8e8!important}
+.phase-hero__desc{color:#aaaaaa!important}
+
+/* FIX 4: Ramp card text — replace dark red rgba with readable colors */
+.ramp-card__week{color:#888888!important}
+.ramp-card__label{color:#ff2200!important}
+.ramp-no-start{color:#aaaaaa!important;font-size:13px}
+.ramp-week-dot__circle{
+border-color:rgba(255,255,255,0.15)!important;
+color:#555555!important
+}
+.ramp-week-dot__cal{color:#444444!important}
+.ramp-progress__labels{color:#555555!important}
+.ramp-next{color:#888888!important}
+.ramp-start-label{color:#666666!important}
+.ramp-week-dot__circle.done{color:#22cc66!important;border-color:rgba(34,204,102,0.3)!important}
+.ramp-target__val{
+background:none!important;
+-webkit-text-fill-color:#ffffff!important;
+color:#ffffff!important;
+font-size:22px
+}
+.ramp-target__name{color:#666666!important}
+.ramp-target{background:rgba(255,255,255,0.04)!important;border-color:rgba(255,255,255,0.08)!important}
+
+/* FIX 5: Stat cards — ensure they’re visually distinct */
+.stat-card{
+background:#111111!important;
+border:1px solid #222222!important;
+border-top:3px solid #cc0000!important;
+}
+.stat-card–green{border-top-color:#22cc66!important}
+.stat-card–blue{border-top-color:#44aaff!important}
+.stat-card–gold{border-top-color:#cc0000!important}
+.stat-card__label{color:#666666!important}
+
+/* FIX 6: Phase selector buttons — ensure visible */
+.phase-btn{
+background:#111111!important;
+border:1px solid #333333!important;
+}
+.phase-btn.selected{
+background:#1a0000!important;
+border:2px solid #cc0000!important;
+box-shadow:0 0 8px rgba(200,0,0,0.3)!important;
+}
+.phase-btn__name{color:#e8e8e8!important}
+.phase-btn.selected .phase-btn__name{color:#ffffff!important}
+.phase-btn__meta{color:#666666!important;font-size:12px}
+.phase-btn.selected .phase-btn__meta{color:#888888!important}
+.phase-btn__num{color:#444444!important;font-family:‘Metal Mania’,cursive!important;font-size:28px}
+.phase-btn.selected .phase-btn__num{color:#ff2200!important;text-shadow:0 0 8px rgba(200,0,0,0.7)!important}
+
+/* FIX 7: Glance cards — ensure visible */
+.glance-item{background:#111111!important;border:1px solid #222222!important}
+.glance-label{color:#666666!important}
+.glance-val{color:#e8e8e8!important}
+.glance-check{background:#cc0000!important}
+
+/* FIX 8: Readiness card content */
+.readiness-card{background:#111111!important;border:1px solid #222222!important;border-left:4px solid #cc0000!important}
+.readiness-card__title{color:#cc0000!important;font-size:11px;letter-spacing:2px}
+.readiness-row__label{color:#888888!important}
+.readiness-row__val{color:#ffffff!important;font-size:16px;font-weight:700}
+.readiness-score__num{color:#ff2200!important;text-shadow:0 0 10px rgba(200,0,0,0.6)}
+.readiness-score__label{color:#666666!important}
+.readiness-msg{color:#888888!important}
+
+/* FIX 9: Macro pills and bars */
+.macro-pill{background:#111111!important;border-color:#222222!important}
+.macro-pill–p .macro-pill__val{color:#22cc66!important;-webkit-text-fill-color:#22cc66!important}
+.macro-pill–c .macro-pill__val{color:#44aaff!important;-webkit-text-fill-color:#44aaff!important}
+.macro-pill–f .macro-pill__val{color:#ff8800!important;-webkit-text-fill-color:#ff8800!important}
+.macro-pill__name{color:#555555!important}
+.macro-ring-wrap{background:#111111!important;border-color:#222222!important}
+.macro-stat__nums{color:#888888!important}
+.macro-stat__name{color:#666666!important}
+
+/* FIX 10: Meal cards */
+.meal-card{background:#111111!important;border-color:#222222!important}
+.meal-card__time{color:#cc0000!important}
+.meal-card__name{color:#e8e8e8!important}
+.meal-card__cal{color:#888888!important}
+.meal-item-name{color:#cccccc!important}
+.meal-item-macro{color:#666666!important}
+.meal-card__body{background:#0a0a0a!important;border-top-color:#222222!important}
+.meal-opt-macro–p{color:#22cc66!important}
+.meal-opt-macro–c{color:#44aaff!important}
+.meal-opt-macro–f{color:#ff8800!important}
+.meal-opt-macro–cal{color:#888888!important}
 </style>
 
 </head>
