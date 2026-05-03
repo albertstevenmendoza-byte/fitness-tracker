@@ -307,8 +307,43 @@ svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-lin
 .ramp-start-btn{font-family:‘Space Mono’,monospace;font-size:10px;font-weight:700;letter-spacing:1px;color:#c8a050;background:rgba(122,80,16,0.3);border:1px solid rgba(122,80,16,0.6);border-radius:6px;padding:6px 12px;min-height:32px;white-space:nowrap}
 .ramp-no-start{font-family:‘Lora’,serif;font-size:13px;color:rgba(200,160,80,0.8);text-align:center;margin-bottom:10px}
 
-/* Toast */
-.toast{position:fixed;bottom:calc(68px + 12px);left:50%;transform:translateX(-50%) translateY(10px);background:#150804;color:#c8a050;border:1px solid #7a5010;border-radius:4px;padding:10px 18px;font-family:‘Space Mono’,monospace;font-size:11px;font-weight:700;letter-spacing:1px;z-index:200;opacity:0;transition:opacity 0.2s,transform 0.2s;pointer-events:none;white-space:nowrap}
+/* ── Meal Availability ───────────────────────────────────── */
+.avail-badge{display:inline-flex;align-items:center;gap:3px;font-family:‘Space Mono’,monospace;font-size:8px;font-weight:700;letter-spacing:1px;padding:2px 6px;border-radius:3px;margin-left:6px;vertical-align:middle;flex-shrink:0}
+.avail-badge–ok{background:rgba(30,62,20,0.1);color:#1e3e14;border:1px solid rgba(30,62,20,0.25)}
+.avail-badge–missing{background:rgba(107,30,18,0.08);color:#6b1e12;border:1px solid rgba(107,30,18,0.2)}
+.meal-opt-tab.unavailable{opacity:0.45}
+.meal-opt-tab.unavailable::after{content:’ ✗’;color:#6b1e12}
+.meal-opt-tab.available::after{content:’ ✓’;color:#1e3e14}
+.missing-banner{background:rgba(107,30,18,0.06);border:1px solid rgba(107,30,18,0.18);border-radius:0 0 6px 6px;padding:8px 14px;font-family:‘Space Mono’,monospace;font-size:10px;color:#6b1e12;letter-spacing:0.5px;line-height:1.6}
+.missing-banner__label{font-weight:700;letter-spacing:2px;margin-bottom:4px}
+.missing-banner__items{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.missing-chip{background:rgba(107,30,18,0.1);border:1px solid rgba(107,30,18,0.25);border-radius:4px;padding:2px 8px;font-size:10px;color:#6b1e12}
+.no-meals-available{background:#f0e4cc;border:1px solid #a08850;border-radius:6px;padding:24px 16px;text-align:center;color:#6c4824}
+.no-meals-available__icon{font-size:28px;margin-bottom:8px}
+.no-meals-available__title{font-family:‘Playfair Display’,serif;font-size:16px;font-weight:800;color:#150804;margin-bottom:6px}
+.no-meals-available__text{font-size:13px;line-height:1.5}
+.grocery-hint-btn{display:inline-block;margin-top:10px;font-family:‘Space Mono’,monospace;font-size:10px;font-weight:700;letter-spacing:1px;color:#7a5010;background:rgba(122,80,16,0.1);border:1px solid rgba(122,80,16,0.3);border-radius:6px;padding:8px 14px;min-height:36px}
+.avail-count{font-family:‘Space Mono’,monospace;font-size:9px;color:#6c4824;margin-bottom:8px;letter-spacing:1px}
+.avail-count span{font-weight:700;color:#1e3e14}
+.meal-week-adj{background:linear-gradient(135deg,rgba(30,62,20,0.06),rgba(30,62,20,0.12));border:1px solid rgba(30,62,20,0.25);border-left:3px solid #1e3e14;border-radius:0 0 6px 6px;padding:10px 14px;margin-top:0}
+.meal-week-adj__header{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.meal-week-adj__badge{font-family:‘Space Mono’,monospace;font-size:8px;font-weight:700;letter-spacing:2px;color:#fff;background:#1e3e14;border-radius:3px;padding:2px 6px}
+.meal-week-adj__why{font-family:‘Space Mono’,monospace;font-size:9px;color:#1e3e14;letter-spacing:1px}
+.meal-adj-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(30,62,20,0.12);font-size:13px}
+.meal-adj-row:last-child{border-bottom:none}
+.meal-adj-row__name{color:#1e3e14;font-weight:500}
+.meal-adj-row__macro{font-family:‘Space Mono’,monospace;font-size:10px;font-weight:700;color:#1e3e14}
+.meal-week-adj__total{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:8px;border-top:1px solid rgba(30,62,20,0.25)}
+.meal-week-adj__total-label{font-family:‘Space Mono’,monospace;font-size:9px;font-weight:700;letter-spacing:1px;color:#6c4824}
+.meal-week-adj__total-val{font-family:‘Playfair Display’,serif;font-size:14px;font-weight:800;color:#1e3e14}
+.meal-no-adj{background:#e4d4b0;border-radius:0 0 6px 6px;padding:8px 14px;font-family:‘Space Mono’,monospace;font-size:9px;color:#6c4824;letter-spacing:1px;margin-top:0}
+.week-adj-banner{background:linear-gradient(135deg,#1e3e14,#2d5a20);border-radius:6px;padding:12px 14px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.week-adj-banner__left{display:flex;flex-direction:column;gap:2px}
+.week-adj-banner__week{font-family:‘Space Mono’,monospace;font-size:9px;font-weight:700;letter-spacing:2px;color:rgba(200,228,200,0.7)}
+.week-adj-banner__title{font-family:‘Playfair Display’,serif;font-size:15px;font-weight:800;color:#f0e4cc}
+.week-adj-banner__right{text-align:right}
+.week-adj-banner__cal{font-family:‘Rye’,cursive;font-size:22px;color:#a0d090;line-height:1}
+.week-adj-banner__label{font-family:‘Space Mono’,monospace;font-size:8px;color:rgba(200,228,200,0.7);letter-spacing:1px}left:50%;transform:translateX(-50%) translateY(10px);background:#150804;color:#c8a050;border:1px solid #7a5010;border-radius:4px;padding:10px 18px;font-family:‘Space Mono’,monospace;font-size:11px;font-weight:700;letter-spacing:1px;z-index:200;opacity:0;transition:opacity 0.2s,transform 0.2s;pointer-events:none;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 /* Shrink nav labels for 6 items */
 .nav-btn span{font-family:‘Space Mono’,monospace;font-size:8px;font-weight:700;letter-spacing:0.5px}
@@ -963,7 +998,7 @@ const PHASES = {
 
 const GROCERY=[
   {section:"🥩 HIGH-LEUCINE PROTEINS",items:[{key:"g_chicken",name:"Chicken Breast (boneless/skinless)",qty:"4 lbs"},{key:"g_turkey",name:"93/7 Ground Turkey",qty:"2 lbs"},{key:"g_tuna",name:"Canned Tuna in Water",qty:"8 cans"},{key:"g_shrimp",name:"Shrimp (frozen, peeled/deveined)",qty:"1.5 lbs"},{key:"g_salmon",name:"Salmon (fresh or frozen)",qty:"1.5 lbs"},{key:"g_tilapia",name:"Tilapia / Cod (frozen)",qty:"2 lbs"},{key:"g_whey",name:"Whey Protein Isolate",qty:"2 lb bag"}]},
-  {section:"🥛 DAIRY PROTEINS",items:[{key:"g_yogurt",name:"Non-fat Greek Yogurt",qty:"32 oz × 2"},{key:"g_cottage",name:"1% Cottage Cheese",qty:"24 oz × 2"},{key:"g_eggwhite",name:"Liquid Egg Whites",qty:"32 oz carton"},{key:"g_eggs",name:"Whole Eggs",qty:"18-count"}]},
+  {section:"🥛 DAIRY PROTEINS",items:[{key:"g_yogurt",name:"Non-fat Greek Yogurt",qty:"32 oz × 2"},{key:"g_cottage",name:"1% Cottage Cheese",qty:"24 oz × 2"},{key:"g_eggwhite",name:"Liquid Egg Whites",qty:"32 oz carton"},{key:"g_eggs",name:"Whole Eggs",qty:"18-count"},{key:"g_peamilk",name:"Chocolate Pea Milk (Ripple)",qty:"2 × 48 oz"}]},
   {section:"🍚 PERFORMANCE CARBS",items:[{key:"g_rice",name:"White Rice",qty:"5 lb bag"},{key:"g_oats",name:"Rolled Oats",qty:"42 oz canister"},{key:"g_sweetpot",name:"Sweet Potatoes",qty:"4 lbs"},{key:"g_potato",name:"White / Russet Potatoes",qty:"3 lbs"},{key:"g_banana",name:"Bananas",qty:"1 bunch"},{key:"g_blueberry",name:"Blueberries (fresh/frozen)",qty:"1 pint"},{key:"g_bagels",name:"Sprouts New York Bagels",qty:"1 pack"}]},
   {section:"🧀 DAIRY + SPREADS",items:[{key:"g_creamcheese",name:"Nancy's Probiotic Cream Cheese",qty:"8 oz"}]},
   {section:"🥦 VEGETABLES",items:[{key:"g_broccoli",name:"Broccoli (fresh or frozen)",qty:"2 lbs"},{key:"g_spinach",name:"Baby Spinach",qty:"5 oz × 2"},{key:"g_pepper",name:"Bell Peppers",qty:"4–5"},{key:"g_zucchini",name:"Zucchini",qty:"3"},{key:"g_garlic",name:"Garlic",qty:"1 head"}]},
@@ -980,8 +1015,83 @@ const Store={
 };
 
 // ═══════════════════════════════════════════════════════════
-// STATE
+// INGREDIENT AVAILABILITY — maps grocery keys to meal keywords
+// Pantry staples (garlic, hot sauce, spices) are excluded —
+// assumed always available. Only shop items are checked.
 // ═══════════════════════════════════════════════════════════
+const GROCERY_INGREDIENT_MAP = {
+  // Proteins
+  g_chicken:    ['chicken breast','chicken'],
+  g_turkey:     ['ground turkey','turkey'],
+  g_tuna:       ['tuna'],
+  g_shrimp:     ['shrimp'],
+  g_salmon:     ['salmon'],
+  g_tilapia:    ['tilapia','cod'],
+  g_whey:       ['whey protein','whey'],
+  // Dairy
+  g_yogurt:     ['greek yogurt'],
+  g_cottage:    ['cottage cheese'],
+  g_eggwhite:   ['egg white','liquid egg'],
+  g_eggs:       ['whole egg'],
+  g_peamilk:    ['pea milk'],
+  g_creamcheese:['cream cheese'],
+  // Carbs
+  g_rice:       ['white rice','rice'],
+  g_oats:       ['rolled oats','oats'],
+  g_sweetpot:   ['sweet potato'],
+  g_banana:     ['banana'],
+  g_blueberry:  ['blueberries','blueberry'],
+  g_bagels:     ['bagel'],
+  // Veg
+  g_broccoli:   ['broccoli'],
+  g_spinach:    ['spinach'],
+  g_avocado:    ['avocado'],
+  // Fats
+  g_olive:      ['olive oil'],
+};
+
+/**
+ * Returns array of grocery keys required by a meal option.
+ * Skips note lines (starting with ↳ or ──).
+ */
+function getMealIngredientKeys(option) {
+  const keys = new Set();
+  (option.items || []).forEach(item => {
+    const name = (item.name || '').toLowerCase();
+    if (name.startsWith('↳') || name.startsWith('──')) return;
+    Object.entries(GROCERY_INGREDIENT_MAP).forEach(([key, keywords]) => {
+      if (keywords.some(kw => name.includes(kw))) keys.add(key);
+    });
+  });
+  return [...keys];
+}
+
+/**
+ * Returns true if all required ingredients are checked in grocery list.
+ */
+function isMealAvailable(option) {
+  const keys = getMealIngredientKeys(option);
+  if (!keys.length) return true; // no trackable ingredients = always available
+  return keys.every(k => !!State.groceryChecks[k]);
+}
+
+/**
+ * Returns array of grocery keys that are missing (not checked).
+ */
+function getMissingIngredients(option) {
+  return getMealIngredientKeys(option).filter(k => !State.groceryChecks[k]);
+}
+
+/**
+ * Returns human-readable name for a grocery key.
+ */
+function groceryKeyName(key) {
+  for (const section of GROCERY) {
+    const item = section.items.find(i => i.key === key);
+    if (item) return item.name.split('(')[0].split(',')[0].trim();
+  }
+  return key;
+}
 const State={phase:1,mealLogs:{},mealOptions:{},customFoods:[],groceryChecks:{},todayWorkout:null,sessionSets:{},exerciseHistory:{},prs:{},bodyEntries:[],openExercises:new Set()};
 
 // ═══════════════════════════════════════════════════════════
@@ -1038,9 +1148,124 @@ const WEEKLY_RAMP = [
 ];
 
 /**
- * Returns days elapsed since program start.
- * Returns null if no start date set.
+ * WEEKLY_MEAL_ADJUSTMENTS
+ * Per-week additions to the base meal plan.
+ * Carbs do the heavy lifting — protein stays ~stable, fat stays low.
+ * Each entry specifies what to ADD to the base Phase meal.
+ * Meal slots: 0=breakfast 1=morning 2=pre-workout 3=post-workout
+ *
+ * Design principle: additions are simple whole foods already on the
+ * grocery list. No new shopping required week to week.
  */
+const WEEKLY_MEAL_ADJUSTMENTS = [
+  // Week 1 — 1,500 cal — base meals only, no additions
+  {
+    week: 1, cal: 1500,
+    summary: 'Base meals only — no additions this week.',
+    additions: [null, null, null, null],
+  },
+  // Week 2 — 1,600 cal — +100 cal, mostly carbs
+  // Add ½ cup rice to post-workout meal (103 cal, 22g carbs)
+  {
+    week: 2, cal: 1600,
+    summary: '+100 cal via extra carbs post-workout.',
+    additions: [
+      null,
+      null,
+      null,
+      { items:[{name:'White rice, ½ cup cooked (add to meal)',macro:'+2P · +22C · 0F · +103cal'}], addedCal:103, addedProtein:2, addedCarbs:22, addedFat:0,
+        why:'Extra carbs post-workout replenish glycogen after session. Keep fat low here.' },
+    ],
+  },
+  // Week 3 — 1,700 cal — +200 cal from base
+  // Add ½ cup rice post-workout + ½ cup oats to breakfast
+  {
+    week: 3, cal: 1700,
+    summary: '+200 cal — carbs added at breakfast and post-workout.',
+    additions: [
+      { items:[{name:'Rolled oats, ¼ cup dry (add to morning bowl)',macro:'+4P · +18C · 1F · +100cal'}], addedCal:100, addedProtein:4, addedCarbs:18, addedFat:1,
+        why:'Morning carbs support 9am training quality and glycogen going into the day.' },
+      null,
+      null,
+      { items:[{name:'White rice, ½ cup cooked (add to meal)',macro:'+2P · +22C · 0F · +103cal'}], addedCal:103, addedProtein:2, addedCarbs:22, addedFat:0,
+        why:'Post-workout glycogen reload continues to grow with training volume.' },
+    ],
+  },
+  // Week 4 — 1,800 cal — +300 cal from base, Phase 2 begins
+  // Add carbs to breakfast, morning, post-workout
+  {
+    week: 4, cal: 1800,
+    summary: '+300 cal — Phase 2 starts. 4th training day added, fuel goes up.',
+    additions: [
+      { items:[{name:'Rolled oats, ¼ cup dry (add to bowl)',macro:'+4P · +18C · 1F · +100cal'}], addedCal:100, addedProtein:4, addedCarbs:18, addedFat:1,
+        why:'More training days = more glycogen demand. Breakfast carbs prime morning sessions.' },
+      { items:[{name:'Sweet potato, 1 small (add as side)',macro:'+1P · +16C · 0F · +70cal'}], addedCal:70, addedProtein:1, addedCarbs:16, addedFat:0,
+        why:'Low-GI carb keeps energy stable into pre-workout window.' },
+      null,
+      { items:[{name:'White rice, ½ cup cooked (add to meal)',macro:'+2P · +22C · 0F · +103cal'},{name:'Banana, 1 small (add alongside)',macro:'+1P · +23C · 0F · +90cal'}], addedCal:193, addedProtein:3, addedCarbs:45, addedFat:0,
+        why:'4 training days means more glycogen to replenish. Dual-speed carb load post-workout.' },
+    ],
+  },
+  // Week 5 — 1,875 cal — +375 cal from base, slower increment
+  {
+    week: 5, cal: 1875,
+    summary: '+375 cal — ramp slows to +75 as you approach maintenance.',
+    additions: [
+      { items:[{name:'Rolled oats, ¼ cup dry (add to bowl)',macro:'+4P · +18C · 1F · +100cal'}], addedCal:100, addedProtein:4, addedCarbs:18, addedFat:1,
+        why:'Maintaining the morning carb base from Week 4.' },
+      { items:[{name:'Sweet potato, 1 small',macro:'+1P · +16C · 0F · +70cal'}], addedCal:70, addedProtein:1, addedCarbs:16, addedFat:0,
+        why:'Steady midday carb to fuel afternoon training sessions.' },
+      { items:[{name:'Banana, 1 small (pre-workout addition)',macro:'+1P · +23C · 0F · +90cal'}], addedCal:90, addedProtein:1, addedCarbs:23, addedFat:0,
+        why:'Pre-workout carb bump supports higher RPE 8 training now in Phase 2.' },
+      { items:[{name:'White rice, ½ cup cooked (add to meal)',macro:'+2P · +22C · 0F · +103cal'}], addedCal:103, addedProtein:2, addedCarbs:22, addedFat:0,
+        why:'Post-workout reload maintained from prior weeks.' },
+    ],
+  },
+  // Week 6 — 1,950 cal — +450 cal from base
+  {
+    week: 6, cal: 1950,
+    summary: '+450 cal — approaching maintenance. Deficit narrowing to ~460 cal.',
+    additions: [
+      { items:[{name:'Rolled oats, ¼ cup dry (add to bowl)',macro:'+4P · +18C · 1F · +100cal'},{name:'Non-fat Greek yogurt, ¼ cup (add to bowl)',macro:'+6P · +3C · 0F · +33cal'}], addedCal:133, addedProtein:10, addedCarbs:21, addedFat:1,
+        why:'Protein gets a small boost here — closer to maintenance means more MPS opportunity.' },
+      { items:[{name:'Sweet potato, 1 small',macro:'+1P · +16C · 0F · +70cal'}], addedCal:70, addedProtein:1, addedCarbs:16, addedFat:0, why:'Consistent midday carb maintained.' },
+      { items:[{name:'Banana, 1 small (pre-workout)',macro:'+1P · +23C · 0F · +90cal'}], addedCal:90, addedProtein:1, addedCarbs:23, addedFat:0, why:'Pre-workout carbs support near-failure RPE 8–9 work.' },
+      { items:[{name:'White rice, ¾ cup cooked (increase from ½ cup)',macro:'+3P · +34C · 0F · +155cal'}], addedCal:155, addedProtein:3, addedCarbs:34, addedFat:0,
+        why:'Post-workout reload grows with training intensity. Deficit is narrowing — recovery improves.' },
+    ],
+  },
+  // Week 7 — 2,050 cal — Phase 3 — True recomp begins
+  {
+    week: 7, cal: 2050,
+    summary: 'Phase 3 — true recomp territory. ~360 cal deficit. Muscle building begins in earnest.',
+    additions: [
+      { items:[{name:'Rolled oats, ¼ cup dry (add to bowl)',macro:'+4P · +18C · 1F · +100cal'},{name:'Non-fat Greek yogurt, ¼ cup',macro:'+6P · +3C · 0F · +33cal'}], addedCal:133, addedProtein:10, addedCarbs:21, addedFat:1, why:'Higher calorie environment supports larger morning meal for all-day energy.' },
+      { items:[{name:'Sweet potato, 1 small',macro:'+1P · +16C · 0F · +70cal'},{name:'Olive oil, ½ tbsp (on veg)',macro:'0P · 0C · +7F · +60cal'}], addedCal:130, addedProtein:1, addedCarbs:16, addedFat:7,
+        why:'Fat comes up slightly in Phase 3 — supports testosterone synthesis and hormonal health.' },
+      { items:[{name:'Banana, 1 small (pre-workout)',macro:'+1P · +23C · 0F · +90cal'}], addedCal:90, addedProtein:1, addedCarbs:23, addedFat:0, why:'Max pre-workout carb load for peak RPE 9 performance.' },
+      { items:[{name:'White rice, ¾ cup cooked (increase from base)',macro:'+3P · +34C · 0F · +155cal'},{name:'Blueberries, ½ cup (add to shake bowl)',macro:'0P · +11C · 0F · +42cal'}], addedCal:197, addedProtein:3, addedCarbs:45, addedFat:0,
+        why:'Largest post-workout reload. Blueberries: anthocyanins reduce oxidative stress from near-failure training.' },
+    ],
+  },
+  // Week 8 — 2,050 cal — Hold and build
+  {
+    week: 8, cal: 2050,
+    summary: 'Hold at 2,050 cal. Re-evaluate after 3 weeks if weight stalls.',
+    additions: [
+      { items:[{name:'Rolled oats, ¼ cup dry (add to bowl)',macro:'+4P · +18C · 1F · +100cal'},{name:'Non-fat Greek yogurt, ¼ cup',macro:'+6P · +3C · 0F · +33cal'}], addedCal:133, addedProtein:10, addedCarbs:21, addedFat:1, why:'Same as Week 7 — maintain the full meal structure.' },
+      { items:[{name:'Sweet potato, 1 small',macro:'+1P · +16C · 0F · +70cal'},{name:'Olive oil, ½ tbsp (on veg)',macro:'0P · 0C · +7F · +60cal'}], addedCal:130, addedProtein:1, addedCarbs:16, addedFat:7, why:'Maintained from Week 7.' },
+      { items:[{name:'Banana, 1 small (pre-workout)',macro:'+1P · +23C · 0F · +90cal'}], addedCal:90, addedProtein:1, addedCarbs:23, addedFat:0, why:'Maintain pre-workout carb load.' },
+      { items:[{name:'White rice, ¾ cup cooked',macro:'+3P · +34C · 0F · +155cal'},{name:'Blueberries, ½ cup',macro:'0P · +11C · 0F · +42cal'}], addedCal:197, addedProtein:3, addedCarbs:45, addedFat:0, why:'Maintained from Week 7.' },
+    ],
+  },
+];
+
+/** Get meal adjustments for the current week */
+function getCurrentMealAdjustments() {
+  const week = getCurrentWeekNum();
+  if (!week) return WEEKLY_MEAL_ADJUSTMENTS[0];
+  return WEEKLY_MEAL_ADJUSTMENTS[Math.min(week - 1, WEEKLY_MEAL_ADJUSTMENTS.length - 1)];
+}
 function getProgramDays() {
   const startDate = Store.get('programStartDate', null);
   if (!startDate) return null;
@@ -1938,10 +2163,12 @@ const App={
   // ── Meals ──────────────────────────────────────────────────
   renderMeals(){
     const weekData = getCurrentWeekData();
+    const mealAdj  = getCurrentMealAdjustments();
     const p = PHASES[weekData.phase];
     const meals = p.meals;
-    // Use THIS WEEK's targets for the ring and bars
     const t = { cal: weekData.cal, protein: weekData.protein, carbs: weekData.carbs, fat: weekData.fat };
+
+    // Tally base meal macros
     let totCal=0,totP=0,totC=0,totF=0;
     meals.forEach((m,i)=>{
       if(State.mealLogs[i]){
@@ -1949,30 +2176,159 @@ const App={
         totCal+=opt.cal;totP+=opt.protein;totC+=opt.carbs;totF+=opt.fat;
       }
     });
-    // Add custom foods from USDA search to daily totals
+    // Add custom USDA foods
     State.customFoods.forEach(f=>{totCal+=f.cal;totP+=f.protein;totC+=f.carbs;totF+=f.fat;});
+
+    // Add adjustment totals for checked meals
+    meals.forEach((_,i)=>{
+      if(State.mealLogs[i]&&mealAdj.additions[i]){
+        const adj=mealAdj.additions[i];
+        totCal+=adj.addedCal;totP+=adj.addedProtein;totC+=adj.addedCarbs;totF+=adj.addedFat;
+      }
+    });
+
+    // Fix floating point — round everything before display
+    totCal=Math.round(totCal);totP=Math.round(totP);totC=Math.round(totC);totF=Math.round(totF);
+
     const r=34,circ=2*Math.PI*r,offset=circ-(pct(totCal,t.cal)/100)*circ;
     document.getElementById('macroRingWrap').innerHTML=`<div class="macro-ring"><svg viewBox="0 0 88 88"><circle class="macro-ring__track" cx="44" cy="44" r="${r}"/><circle class="macro-ring__fill" cx="44" cy="44" r="${r}" stroke-dasharray="${circ}" stroke-dashoffset="${offset}"/></svg><div class="macro-ring__center"><div class="macro-ring__cal">${totCal}</div><div class="macro-ring__label">/ ${t.cal}</div></div></div><div class="macro-stats">${this._macroBar('PROTEIN',totP,t.protein,'#3d5a3e')}${this._macroBar('CARBS',totC,t.carbs,'#3a5068')}${this._macroBar('FAT',totF,t.fat,'#7a5010')}</div>`;
     document.getElementById('macroBars').innerHTML=`<div class="macro-pill macro-pill--p"><div class="macro-pill__val">${totP}g</div><div class="macro-pill__name">PROTEIN</div></div><div class="macro-pill macro-pill--c"><div class="macro-pill__val">${totC}g</div><div class="macro-pill__name">CARBS</div></div><div class="macro-pill macro-pill--f"><div class="macro-pill__val">${totF}g</div><div class="macro-pill__name">FAT</div></div>`;
-    document.getElementById('mealList').innerHTML=meals.map((m,i)=>{
+
+    // Week adjustment banner above meal list
+    const weekNum = getCurrentWeekNum()||1;
+    const hasAnyAdj = mealAdj.additions.some(a=>a!==null);
+    const adjBanner = hasAnyAdj
+      ? `<div class="week-adj-banner">
+          <div class="week-adj-banner__left">
+            <div class="week-adj-banner__week">WEEK ${weekNum} · ${weekData.cal} CAL TARGET</div>
+            <div class="week-adj-banner__title">${mealAdj.summary}</div>
+          </div>
+          <div class="week-adj-banner__right">
+            <div class="week-adj-banner__cal">+${weekData.cal-1500}</div>
+            <div class="week-adj-banner__label">vs WEEK 1</div>
+          </div>
+        </div>`
+      : `<div class="week-adj-banner">
+          <div class="week-adj-banner__left">
+            <div class="week-adj-banner__week">WEEK ${weekNum} · ${weekData.cal} CAL TARGET</div>
+            <div class="week-adj-banner__title">Base meals only — no additions yet.</div>
+          </div>
+          <div class="week-adj-banner__right">
+            <div class="week-adj-banner__cal">W1</div>
+            <div class="week-adj-banner__label">BASE</div>
+          </div>
+        </div>`;
+
+    // Check if ANY grocery items are checked — if none, show all meals normally
+    const anyChecked = Object.values(State.groceryChecks).some(Boolean);
+
+    document.getElementById('mealList').innerHTML = adjBanner + meals.map((m,i)=>{
       const done=!!State.mealLogs[i];
-      const selOpt=State.mealOptions[i]||0;
-      const opt=m.options[selOpt];
-      const lbl=m.label==='post'?'<span class="label-tag">POST-WORKOUT</span>':m.label==='pre'?'<span class="label-tag pre">PRE-WORKOUT</span>':'';
-      const tabs=m.options.map((o,oi)=>`<div class="meal-opt-tab ${oi===selOpt?'active':''}" onclick="App.selectMealOption(event,${i},${oi})">${oi+1}. ${o.name}</div>`).join('');
-      const items=opt.items.map(it=>it.name.startsWith('↳')||it.name.startsWith('──')?`<div style="font-size:11px;color:#6c4824;padding:4px 0;font-family:'Space Mono',monospace">${it.name}</div>`:`<div class="meal-item-row"><span class="meal-item-name">${it.name}</span><span class="meal-item-macro">${it.macro}</span></div>`).join('');
-      return`<div class="meal-card ${done?'done':''}" id="mc${i}">
+      const adj=mealAdj.additions[i];
+
+      // ── Availability logic ──────────────────────────────
+      // Sort options: available first, then unavailable
+      const optionsWithAvail = m.options.map((opt,oi) => ({
+        opt, oi,
+        available: !anyChecked || isMealAvailable(opt),
+        missing: anyChecked ? getMissingIngredients(opt) : [],
+      }));
+      const sortedOptions = anyChecked
+        ? [...optionsWithAvail].sort((a,b) => b.available - a.available)
+        : optionsWithAvail;
+
+      // Auto-correct current selection if it's unavailable
+      let selOpt = State.mealOptions[i] || 0;
+      if (anyChecked && optionsWithAvail[selOpt] && !optionsWithAvail[selOpt].available) {
+        const firstAvail = optionsWithAvail.findIndex(o => o.available);
+        if (firstAvail !== -1) {
+          selOpt = firstAvail;
+          State.mealOptions[i] = selOpt;
+          Store.set('mealOptions:'+today(), State.mealOptions);
+        }
+      }
+
+      const opt = m.options[selOpt];
+      const currentAvail = !anyChecked || isMealAvailable(opt);
+      const currentMissing = anyChecked ? getMissingIngredients(opt) : [];
+      const availCount = optionsWithAvail.filter(o=>o.available).length;
+
+      const lbl = m.label==='post'
+        ? '<span class="label-tag">POST-WORKOUT</span>'
+        : m.label==='pre'
+        ? '<span class="label-tag pre">PRE-WORKOUT</span>'
+        : '';
+
+      // Available badge on meal card header
+      const availBadge = anyChecked
+        ? currentAvail
+          ? `<span class="avail-badge avail-badge--ok">✓ READY</span>`
+          : `<span class="avail-badge avail-badge--missing">✗ MISSING</span>`
+        : '';
+
+      // Option tabs with availability indicator
+      const tabs = sortedOptions.map(({opt:o, oi, available, missing}) =>
+        `<div class="meal-opt-tab ${oi===selOpt?'active':''} ${anyChecked?(available?'available':'unavailable'):''}"
+          onclick="App.selectMealOption(event,${i},${oi})"
+          title="${!available?'Missing: '+missing.map(groceryKeyName).join(', '):''}"
+          >${oi+1}. ${o.name}</div>`
+      ).join('');
+
+      const items = opt.items.map(it =>
+        it.name.startsWith('↳') || it.name.startsWith('──')
+          ? `<div style="font-size:11px;color:#6c4824;padding:4px 0;font-family:'Space Mono',monospace">${it.name}</div>`
+          : `<div class="meal-item-row"><span class="meal-item-name">${it.name}</span><span class="meal-item-macro">${it.macro}</span></div>`
+      ).join('');
+
+      // Missing ingredients banner for current selection
+      const missingBanner = anyChecked && currentMissing.length
+        ? `<div class="missing-banner">
+            <div class="missing-banner__label">MISSING FROM GROCERY LIST</div>
+            <div class="missing-banner__items">
+              ${currentMissing.map(k=>`<span class="missing-chip">${groceryKeyName(k)}</span>`).join('')}
+            </div>
+            <div style="margin-top:6px;font-size:9px;opacity:0.8">Check off these items in the GROCERY tab to unlock this meal.</div>
+          </div>`
+        : '';
+
+      // Availability count line
+      const availLine = anyChecked
+        ? `<div class="avail-count"><span>${availCount}</span> of ${m.options.length} options available with your groceries</div>`
+        : '';
+
+      // Weekly adjustment block
+      const adjHtml = adj ? `
+        <div class="meal-week-adj">
+          <div class="meal-week-adj__header">
+            <span class="meal-week-adj__badge">WEEK ${weekNum} ADD</span>
+            <span class="meal-week-adj__why">${adj.why}</span>
+          </div>
+          ${adj.items.map(it=>`<div class="meal-adj-row"><span class="meal-adj-row__name">${it.name}</span><span class="meal-adj-row__macro">${it.macro}</span></div>`).join('')}
+          <div class="meal-week-adj__total">
+            <span class="meal-week-adj__total-label">ADDITION TOTAL</span>
+            <span class="meal-week-adj__total-val">+${adj.addedCal} cal · +${adj.addedProtein}g P · +${adj.addedCarbs}g C · +${adj.addedFat}g F</span>
+          </div>
+        </div>` : weekNum > 1 ? `<div class="meal-no-adj">NO ADDITION THIS WEEK FOR THIS MEAL</div>` : '';
+
+      const totalMealCal = opt.cal + (adj ? adj.addedCal : 0);
+      const totalMealP   = opt.protein + (adj ? adj.addedProtein : 0);
+
+      return `<div class="meal-card ${done?'done':''}" id="mc${i}">
         <div class="meal-card__header" onclick="App.expandMeal(${i})">
           <div class="meal-card__checkbox" onclick="App.toggleMeal(event,${i})"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <div class="meal-card__info">
+          <div class="meal-card__info" style="flex:1;min-width:0">
             <div class="meal-card__time">${m.time}</div>
-            <div class="meal-card__name">${opt.name}</div>
-            <div class="meal-card__cal">${opt.cal} cal · ${opt.protein}g P</div>
+            <div class="meal-card__name" style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">
+              ${opt.name}${adj?` <span style="font-size:11px;color:#1e3e14;font-family:'Space Mono',monospace">+adj</span>`:''}
+              ${availBadge}
+            </div>
+            <div class="meal-card__cal">${totalMealCal} cal · ${totalMealP}g P${adj?` <span style="color:#1e3e14">(+${adj.addedCal} wk${weekNum})</span>`:''}</div>
           </div>
           ${lbl}
           <div class="meal-card__expand"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         </div>
         <div class="meal-card__body">
+          ${availLine}
           <div class="meal-options-tabs">${tabs}</div>
           <div class="meal-opt-macros">
             <span class="meal-opt-macro meal-opt-macro--p">${opt.protein}g P</span>
@@ -1981,7 +2337,9 @@ const App={
             <span class="meal-opt-macro meal-opt-macro--cal">${opt.cal} kcal</span>
           </div>
           ${items}
+          ${missingBanner}
         </div>
+        ${adjHtml}
       </div>`;
     }).join('');
   },
@@ -2184,7 +2542,13 @@ const App={
     document.getElementById('groceryHeader').innerHTML=`<div><div class="grocery-header__label">PHASE ${State.phase} · ${p.weeks}</div><div class="grocery-header__title">${checked}/${total} Items</div></div><button class="grocery-reset" onclick="App.resetGrocery()">RESET</button>`;
     document.getElementById('groceryBody').innerHTML=GROCERY.map(sec=>`<div><div class="grocery-section__title">${sec.section}</div><div class="grocery-items">${sec.items.map(item=>`<div class="grocery-item ${State.groceryChecks[item.key]?'checked':''}" onclick="App.toggleGrocery('${item.key}')"><div class="g-check"></div><div class="g-name">${item.name}</div><div class="g-qty">${item.qty}</div></div>`).join('')}</div></div>`).join('');
   },
-  toggleGrocery(key){State.groceryChecks[key]=!State.groceryChecks[key];Store.set('grocery',State.groceryChecks);this.renderGrocery()},
+  toggleGrocery(key){
+    State.groceryChecks[key]=!State.groceryChecks[key];
+    Store.set('grocery',State.groceryChecks);
+    this.renderGrocery();
+    // Refresh meals so availability updates live
+    if(document.getElementById('tab-meals').classList.contains('active')) this.renderMeals();
+  },
   resetGrocery(){if(!confirm('Uncheck all grocery items?'))return;State.groceryChecks={};Store.set('grocery',{});this.renderGrocery();toast('Grocery list reset')},
 
   // ── Stats ──────────────────────────────────────────────────
