@@ -26,15 +26,33 @@
   // Brzycki estimated 1RM
   const brzycki = (w, r) => (r >= 37 ? w : w * (36 / (37 - r)));
 
-  // Rest duration: f(type, RPE)
+  // Rest duration in seconds: f(type, RPE)
+  // Calibrated to current hypertrophy literature (Schoenfeld 2016, Grgic 2017,
+  // Henselmans & Schoenfeld 2014). Longer rest preserves volume load — old short-rest
+  // hormonal hypothesis didn't hold up; total weekly volume drives growth, and short
+  // rest forces rep drop-off on later sets.
+  //   Compound at RPE 8+: 3–5 min for ATP/PCr replenishment + CNS recovery
+  //   Compound moderate: 2–3 min
+  //   Isolation heavy: 90–120s, moderate 60–90s
   const REST = {
-    compound:  { 5: 120, 6: 120, 7: 150, 8: 180, 9: 210, 10: 240 },
-    isolation: { 5: 45,  6: 60,  7: 75,  8: 90,  9: 105, 10: 120 }
+    compound:  { 5: 120, 6: 150, 7: 180, 8: 240, 9: 300, 10: 300 },
+    isolation: { 5: 60,  6: 60,  7: 75,  8: 90,  9: 120, 10: 120 }
   };
   function getRestDuration(exercise, rpe) {
     const r = Math.min(10, Math.max(5, Math.round(rpe)));
     return REST[exercise.type][r];
   }
+
+  // Quick-pick durations for the manual timer launcher (seconds)
+  const QUICK_REST = [
+    { s: 45,  label: '0:45' },
+    { s: 60,  label: '1:00' },
+    { s: 90,  label: '1:30' },
+    { s: 120, label: '2:00' },
+    { s: 180, label: '3:00' },
+    { s: 240, label: '4:00' },
+    { s: 300, label: '5:00' }
+  ];
 
   // Most recent prior session (strictly before today)
   function findLastSession(state, exId, beforeDate) {
@@ -491,6 +509,14 @@
             <h2 class="sess-head__name">${day.name}</h2>
             <p class="sess-head__focus">${day.focus}</p>
           </div>
+          <button class="sess-head__timer" data-manual-timer aria-label="Start rest timer" type="button">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="13" r="8"/>
+              <path d="M12 9v4l2.5 1.5"/>
+              <path d="M9 2h6"/>
+              <path d="M12 5V2"/>
+            </svg>
+          </button>
         </header>
 
         <div class="sess-stats">
@@ -671,6 +697,110 @@
     });
   }
 
+  function attachHoldGeneric(btn, fn) {
+    let timeout, interval;
+    const start = (e) => {
+      e.preventDefault();
+      fn();
+      timeout = setTimeout(() => { interval = setInterval(fn, 80); }, 400);
+    };
+    const end = () => { clearTimeout(timeout); clearInterval(interval); };
+    btn.addEventListener('pointerdown', start);
+    btn.addEventListener('pointerup', end);
+    btn.addEventListener('pointerleave', end);
+    btn.addEventListener('pointercancel', end);
+  }
+
+  function openManualTimerModal() {
+    const Modal = SHREDDED.Modal;
+    if (!Modal) return;
+    const html = `
+      <div class="bio-modal rest-modal">
+        <p class="card__eyebrow">Rest Timer</p>
+        <h2 class="bio-modal__title">Pick a duration</h2>
+        <p class="muted" style="font-size:12.5px; margin:0 0 14px; line-height:1.45;">
+          Longer rest preserves volume load on later sets — the strongest driver of hypertrophy.
+        </p>
+
+        <div class="rest-modal__quick">
+          ${QUICK_REST.map((q) => `
+            <button class="rest-modal__pill" data-rest-quick="${q.s}" type="button">
+              <span class="rest-modal__pill-time tnum">${q.label}</span>
+            </button>
+          `).join('')}
+        </div>
+
+        <div class="rest-modal__custom">
+          <label class="rest-modal__custom-label">Custom</label>
+          <div class="spin" data-spin-field="rest" data-spin-step="15" data-spin-decimals="0" data-spin-min="15" data-spin-max="600" data-spin-value="120">
+            <button class="spin__btn" data-spin-act="dec" aria-label="-15s">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg>
+            </button>
+            <div class="spin__value">
+              <span class="spin__num tnum" data-spin-display>2:00</span>
+              <span class="spin__unit">min:sec</span>
+            </div>
+            <button class="spin__btn" data-spin-act="inc" aria-label="+15s">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <button class="btn btn--primary" data-rest-start style="width:100%; margin-top:14px;">Start</button>
+
+        <details class="rest-modal__science">
+          <summary>Why these numbers?</summary>
+          <div class="rest-modal__science-body">
+            <p>Schoenfeld (2016) found 3-min rest produced significantly more hypertrophy than 1-min rest in trained lifters — despite identical volume and intensity prescriptions — because long rest preserves rep counts on later sets.</p>
+            <p>Practical defaults this app uses:</p>
+            <ul>
+              <li><strong>Compound, RPE 8+:</strong> 4–5 min</li>
+              <li><strong>Compound, RPE 6–7:</strong> 2.5–3 min</li>
+              <li><strong>Isolation, RPE 8+:</strong> 90s–2 min</li>
+              <li><strong>Isolation, RPE 6–7:</strong> 60–75s</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    `;
+    Modal.open(html);
+    const root = Modal.root;
+
+    // Wire spinner with min:sec rendering
+    const spin = root.querySelector('.spin');
+    const display = spin.querySelector('[data-spin-display]');
+    const fmtMS = (s) => {
+      const m = Math.floor(s / 60);
+      const ss = String(s % 60).padStart(2, '0');
+      return `${m}:${ss}`;
+    };
+    const apply = (delta) => {
+      let v = parseFloat(spin.dataset.spinValue) + delta;
+      v = Math.max(15, Math.min(600, v));
+      spin.dataset.spinValue = v;
+      display.textContent = fmtMS(v);
+      SHREDDED.Haptic.tick();
+    };
+    attachHoldGeneric(spin.querySelector('[data-spin-act="dec"]'), () => apply(-15));
+    attachHoldGeneric(spin.querySelector('[data-spin-act="inc"]'), () => apply(+15));
+
+    // Quick pick — fires immediately
+    root.querySelectorAll('[data-rest-quick]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const s = parseInt(btn.dataset.restQuick, 10);
+        SHREDDED.RestTimer.start(s, 'Manual rest');
+        Modal.close();
+      });
+    });
+
+    // Custom start
+    root.querySelector('[data-rest-start]').addEventListener('click', () => {
+      const s = parseInt(spin.dataset.spinValue, 10);
+      SHREDDED.RestTimer.start(s, 'Custom rest');
+      Modal.close();
+    });
+  }
+
   function wireSession(state, view) {
     view.querySelector('[data-back-to-selector]')?.addEventListener('click', () => {
       const today = SHREDDED.DateUtil.todayYMD();
@@ -696,6 +826,11 @@
     // History buttons
     view.querySelectorAll('[data-ex-history]').forEach((btn) => {
       btn.addEventListener('click', () => openHistory(state, btn.dataset.exHistory));
+    });
+
+    // Manual rest timer launcher
+    view.querySelector('[data-manual-timer]')?.addEventListener('click', () => {
+      openManualTimerModal();
     });
 
     // Long-press a done set chip to delete it
