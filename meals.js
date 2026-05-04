@@ -191,6 +191,44 @@
     return { tags: out, isOverridden };
   }
 
+  // Score a meal option's macro composition against a PRE-WO / POST-WO tag.
+  // Returns { tier: 'optimal'|'ok'|'suboptimal', reason } — null if no tag passed.
+  // Rules grounded in standard nutrient timing literature:
+  //   PRE-WO: top off glycogen + prime amino acids; fat slows gastric emptying.
+  //   POST-WO: protein for MPS + carbs to refill glycogen; fat is neutral.
+  function tagFitFor(option, tag, weeklyAdj) {
+    if (!tag || tag === 'NONE') return null;
+    const base = sumIngredients(option.ingredients);
+    const adj = weeklyAdj || { kcal: 0, p: 0, c: 0, f: 0 };
+    const m = {
+      kcal: base.kcal + (adj.kcal || 0),
+      p: base.p + (adj.p || 0),
+      c: base.c + (adj.c || 0),
+      f: base.f + (adj.f || 0)
+    };
+    if (tag === 'PRE-WO') {
+      if (m.p >= 20 && m.c >= 25 && m.f < 10 && m.kcal >= 250 && m.kcal <= 500)
+        return { tier: 'optimal',    reason: 'Lean protein + carbs · low fat · ideal pre-lift fuel' };
+      if (m.p >= 15 && m.c >= 20 && m.f < 15)
+        return { tier: 'ok',         reason: 'Acceptable for pre-WO · slightly off-target macros' };
+      if (m.f >= 15)
+        return { tier: 'suboptimal', reason: 'High fat may slow digestion before lifting' };
+      if (m.c < 20)
+        return { tier: 'suboptimal', reason: 'Low carb · won\u2019t top off glycogen' };
+      return                          { tier: 'suboptimal', reason: 'Macros not tuned for pre-WO' };
+    }
+    if (tag === 'POST-WO') {
+      if (m.p >= 25 && m.c >= 20)
+        return { tier: 'optimal',    reason: 'High protein + carbs · ideal recovery window' };
+      if (m.p >= 20 && m.c >= 15)
+        return { tier: 'ok',         reason: 'Decent post-WO · could use more protein or carbs' };
+      if (m.p < 20)
+        return { tier: 'suboptimal', reason: 'Low protein · may underfeed MPS response' };
+      return                          { tier: 'suboptimal', reason: 'Macros not tuned for post-WO' };
+    }
+    return null;
+  }
+
   /* ---------------------------------------------------------- */
   /* TEMPLATES                                                   */
   /* ---------------------------------------------------------- */
@@ -506,16 +544,38 @@
             ${slot.options.map((o, i) => {
               const ok = ingredientsAvailable(state, o.ingredients);
               const active = i === optIdx;
+              const fit = tagFitFor(o, tag, adj);
               return `
                 <button class="meal__tab ${active ? 'is-active' : ''}"
                   data-meal-opt="${i}" role="tab" aria-selected="${active}">
                   <span class="meal__tab-i">0${i + 1}</span>
                   <span class="meal__tab-name">${o.name}</span>
                   ${ok.idle ? '' : ok.ready ? '<span class="meal__tab-dot meal__tab-dot--ok" aria-hidden="true"></span>' : '<span class="meal__tab-dot meal__tab-dot--no" aria-hidden="true"></span>'}
+                  ${fit ? `<span class="meal__tab-fit meal__tab-fit--${fit.tier}" aria-hidden="true"></span>` : ''}
                 </button>
               `;
             }).join('')}
           </div>
+
+          ${(() => {
+            const fit = tagFitFor(opt, tag, adj);
+            if (!fit) return '';
+            const icon = {
+              optimal: '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>',
+              ok:      '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14"/></svg>',
+              suboptimal: '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M12 3l9 16H3z"/></svg>'
+            }[fit.tier];
+            const tierLabel = { optimal: 'Optimal', ok: 'OK', suboptimal: 'Off-target' }[fit.tier];
+            return `
+              <div class="fit-badge fit-badge--${fit.tier}">
+                <span class="fit-badge__icon">${icon}</span>
+                <div class="fit-badge__text">
+                  <span class="fit-badge__tier">${tierLabel} for ${tag}</span>
+                  <span class="fit-badge__reason">${fit.reason}</span>
+                </div>
+              </div>
+            `;
+          })()}
 
           <ul class="ing-list">
             ${opt.ingredients.map((ing) => `
