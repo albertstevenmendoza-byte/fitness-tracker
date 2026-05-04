@@ -1,8 +1,3 @@
-# lift.js
-
-Tap inside the code block and select-all to copy.
-
-```js
 /* ============================================================
    SHREDDED — Lift Tab Module (Phase 3)
    ------------------------------------------------------------
@@ -864,4 +859,3 @@ Tap inside the code block and select-all to copy.
   window.SHREDDED.RestTimer = RestTimer;
 
 })();
-```
