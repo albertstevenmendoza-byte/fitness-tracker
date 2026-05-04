@@ -4461,6 +4461,135 @@ body.modal-locked .app { overflow: hidden; }
   100% { box-shadow: 0 0 0 4px rgba(255,107,107,0.18); }
 }
 
+/* ============================================================
+   23. MANUAL REST TIMER (session header button + modal)
+   ============================================================ */
+.sess-head__timer {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  border: 1px solid rgba(0,229,199,0.32);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  margin-left: auto;
+  transition: transform var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+.sess-head__timer:active {
+  transform: scale(0.92);
+  background: var(--accent);
+  color: #002A24;
+}
+
+/* Modal */
+.rest-modal { padding: 6px 4px 6px; }
+.rest-modal__quick {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.rest-modal__pill {
+  display: grid;
+  place-items: center;
+  padding: 12px 4px;
+  border-radius: var(--r-md);
+  background: var(--srf-1);
+  border: 1px solid var(--glass-stroke);
+  color: var(--txt-primary);
+  transition: transform var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+.rest-modal__pill:active {
+  transform: scale(0.97);
+  background: linear-gradient(180deg, var(--accent) 0%, var(--accent-deep) 100%);
+  color: #002A24;
+  border-color: var(--accent);
+}
+.rest-modal__pill-time {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.018em;
+}
+
+.rest-modal__custom {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  background: var(--srf-1);
+  border: 1px solid var(--glass-stroke);
+  margin-bottom: 4px;
+}
+.rest-modal__custom-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--txt-tertiary);
+}
+
+/* Science accordion */
+.rest-modal__science {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  background: var(--srf-1);
+  border: 1px solid var(--glass-stroke);
+}
+.rest-modal__science summary {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--txt-tertiary);
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.rest-modal__science summary::-webkit-details-marker { display: none; }
+.rest-modal__science summary::after {
+  content: '▾';
+  font-size: 10px;
+  color: var(--txt-tertiary);
+  transition: transform var(--dur-med) var(--ease-spring);
+}
+.rest-modal__science[open] summary::after { transform: rotate(180deg); }
+.rest-modal__science-body {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--glass-stroke);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--txt-secondary);
+  letter-spacing: -0.005em;
+}
+.rest-modal__science-body p { margin: 0 0 8px; }
+.rest-modal__science-body ul {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.rest-modal__science-body strong {
+  color: var(--accent-bright);
+  font-weight: 800;
+}
+
+@media (max-width: 360px) {
+  .rest-modal__quick { grid-template-columns: repeat(3, 1fr); }
+}
+
 /* Reduced motion respect (global, last rule) */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
