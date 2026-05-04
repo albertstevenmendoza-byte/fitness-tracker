@@ -633,6 +633,7 @@
     const refs = [
       { tag: 'PROTEIN',  authors: 'Helms, Aragon, Fitschen', year: '2014', title: 'Evidence-based recommendations for natural bodybuilding contest preparation', journal: 'J Int Soc Sports Nutr', detail: '1.6–2.2 g/kg/day in caloric deficit' },
       { tag: 'VOLUME',   authors: 'Schoenfeld, Ogborn, Krieger', year: '2017', title: 'Dose–response relationship between weekly resistance training volume and increases in muscle mass', journal: 'J Sports Sci', detail: '10+ sets per muscle/week, dose-dependent' },
+      { tag: 'REST',     authors: 'Schoenfeld, Pope, Benik et al.', year: '2016', title: 'Longer interset rest periods enhance muscle strength and hypertrophy in resistance-trained men', journal: 'J Strength Cond Res', detail: '3-min rest > 1-min rest for hypertrophy + strength' },
       { tag: 'BMR',      authors: 'Mifflin, St Jeor, et al.', year: '1990', title: 'A new predictive equation for resting energy expenditure in healthy individuals', journal: 'Am J Clin Nutr', detail: '10·kg + 6.25·cm − 5·age + sex constant' },
       { tag: 'e1RM',     authors: 'Brzycki', year: '1993', title: 'Strength testing — predicting a one-rep max from reps-to-fatigue', journal: 'JOPERD', detail: 'w · (36 / (37 − r)) — accurate at r ≤ 10' }
     ];
