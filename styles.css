@@ -4344,6 +4344,99 @@ body.modal-locked .app { overflow: hidden; }
   border-style: solid;
 }
 
+/* ============================================================
+   21. TAG-FIT BADGE (PRE/POST optimization indicator)
+   ============================================================ */
+
+/* Small fit indicator on each option tab — opposite corner from the grocery dot */
+.meal__tab-fit {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.meal__tab-fit--optimal    { background: var(--good); box-shadow: 0 0 4px rgba(52,211,153,0.6); }
+.meal__tab-fit--ok         { background: var(--accent); box-shadow: 0 0 4px var(--accent-glow); }
+.meal__tab-fit--suboptimal { background: var(--warn); box-shadow: 0 0 4px rgba(244,193,82,0.5); }
+
+/* Hide the fit dot when the tab is active — the explanatory badge below carries the message */
+.meal__tab.is-active .meal__tab-fit { display: none; }
+
+/* Full explanatory badge for the active option — sits between tabs and ingredient list */
+.fit-badge {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  margin-bottom: 12px;
+  border: 1px solid;
+  transition: background var(--dur-med) var(--ease-out), border-color var(--dur-med) var(--ease-out);
+}
+.fit-badge__icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.fit-badge__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.fit-badge__tier {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: -0.005em;
+}
+.fit-badge__reason {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.4;
+  color: var(--txt-secondary);
+}
+
+/* Tone variants */
+.fit-badge--optimal {
+  background: linear-gradient(180deg, rgba(52,211,153,0.08), rgba(52,211,153,0.02));
+  border-color: rgba(52,211,153,0.30);
+}
+.fit-badge--optimal .fit-badge__icon {
+  background: rgba(52,211,153,0.16);
+  color: var(--good);
+  border: 1px solid rgba(52,211,153,0.36);
+}
+.fit-badge--optimal .fit-badge__tier { color: var(--good); }
+
+.fit-badge--ok {
+  background: linear-gradient(180deg, rgba(0,229,199,0.05), rgba(0,229,199,0.01));
+  border-color: rgba(0,229,199,0.24);
+}
+.fit-badge--ok .fit-badge__icon {
+  background: var(--accent-soft);
+  color: var(--accent-bright);
+  border: 1px solid rgba(0,229,199,0.32);
+}
+.fit-badge--ok .fit-badge__tier { color: var(--accent-bright); }
+
+.fit-badge--suboptimal {
+  background: linear-gradient(180deg, rgba(244,193,82,0.08), rgba(244,193,82,0.02));
+  border-color: rgba(244,193,82,0.32);
+}
+.fit-badge--suboptimal .fit-badge__icon {
+  background: rgba(244,193,82,0.16);
+  color: var(--warn);
+  border: 1px solid rgba(244,193,82,0.34);
+}
+.fit-badge--suboptimal .fit-badge__tier { color: var(--warn); }
+
 /* Reduced motion respect (global, last rule) */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
